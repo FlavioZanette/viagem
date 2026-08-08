@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nossa Viagem · Espanha & Portugal 2026</title>
+<style>
+  :root{
+    --bg:#FBF7F0; --card:#FFFFFF; --soft:#F3ECE0;
+    --ink:#2A2521; --muted:#8A7E72; --line:#EAE0D2;
+    --accent:#C0522D; --accent-d:#a5401f;
+    --sea:#2A7D9B; --gold:#b7791f; --olive:#6b8e23;
+    --ok:#2e7d32; --warn:#b7791f;
+    --shadow:0 1px 2px rgba(70,50,25,.04),0 2px 10px rgba(70,50,25,.05);
+    --radius:14px; --radius-ctl:10px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--sea)}
+  h1,h2,h3{line-height:1.25;margin:0 0 .5em;font-weight:600}
+  h2{font-size:1.35rem}
+  h3{font-size:1.05rem}
+  p{margin:.5em 0}
+
+  /* HERO */
+  .hero{background:var(--soft);border-bottom:1px solid var(--line);padding:30px 20px;text-align:center}
+  .hero h1{font-size:1.65rem;margin:0}
+  .hero p{margin:.4em 0 0;color:var(--muted);font-size:1rem}
+  .countdown{display:inline-block;margin-top:12px;background:var(--card);border:1px solid var(--line);
+    color:var(--accent);padding:6px 15px;border-radius:999px;font-weight:600;font-size:.88rem}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:20;background:rgba(251,247,240,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);display:flex;gap:2px;justify-content:center;flex-wrap:wrap;padding:0 8px}
+  .tab-btn{background:none;border:none;cursor:pointer;font-size:.92rem;font-weight:600;color:var(--muted);
+    padding:14px 15px 11px;border-bottom:2px solid transparent;white-space:nowrap;font-family:inherit}
+  .tab-btn:hover{color:var(--ink)}
+  .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+  main{max-width:860px;margin:0 auto;padding:26px 18px 72px}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block;animation:fade .2s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;margin:0 0 24px;box-shadow:var(--shadow)}
+  .grid{display:grid;gap:24px}
+  @media(min-width:640px){.g2{grid-template-columns:1fr 1fr}}
+
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 24px}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+    font-size:.9rem;font-weight:600;box-shadow:var(--shadow)}
+  .chip.accent{color:var(--accent)}
+
+  table{width:100%;border-collapse:collapse;font-size:.93rem}
+  .twrap{overflow-x:auto}
+  th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
+  tr:last-child td{border-bottom:none}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+
+  .badge{display:inline-block;font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;
+    background:var(--soft);color:var(--muted);border:1px solid var(--line)}
+  .badge.red{background:rgba(192,82,45,.12);color:var(--accent);border-color:transparent}
+  .badge.gold{background:rgba(183,121,31,.15);color:var(--warn);border-color:transparent}
+  .badge.sea{background:rgba(42,125,155,.13);color:var(--sea);border-color:transparent}
+  .badge.ok{background:rgba(46,125,50,.12);color:var(--ok);border-color:transparent}
+
+  .callout{border-left:3px solid var(--gold);background:var(--soft);padding:12px 15px;border-radius:0 10px 10px 0;margin:14px 0}
+  .callout.red{border-color:var(--accent)}
+  .callout.sea{border-color:var(--sea)}
+
+  /* PHOTOS */
+  .photo{margin:0}
+  .photo img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:var(--soft)}
+  .photo figcaption{font-size:.78rem;color:var(--muted);margin-top:5px;text-align:center}
+  .hero-photo img{aspect-ratio:16/7}
+  .thumbs{display:flex;gap:12px;margin-top:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  .thumbs .photo{flex:0 0 78%;scroll-snap-align:start}
+  @media(min-width:640px){.thumbs .photo{flex:0 0 31.5%}}
+
+  /* MAP */
+  .mapwrap{margin-top:16px}
+  .mapwrap>summary{cursor:pointer;color:var(--sea);font-weight:600;font-size:.9rem;padding:6px 0;list-style:none}
+  .mapwrap>summary::-webkit-details-marker{display:none}
+  .map{width:100%;height:340px;border:1px solid var(--line);border-radius:12px;margin-top:10px;overflow:hidden;position:relative;z-index:0}
+  .leaflet-popup-content{font-size:.85rem;line-height:1.4}
+  .maplegend{font-size:.8rem;color:var(--muted);margin:8px 0 0}
+
+  /* DAY TIMELINE */
+  .daylist{margin-top:6px}
+  .day{display:flex;gap:16px;padding:13px 0}
+  .day+.day{border-top:1px solid var(--line)}
+  .day .dot{flex:0 0 40px;text-align:center;padding-top:1px}
+  .day .dnum{font-weight:600;font-size:1.15rem;color:var(--accent);line-height:1}
+  .day .dwk{font-size:.64rem;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-top:3px}
+  .day .dbody b{display:block;margin-bottom:3px;font-weight:600}
+  .meal{color:var(--olive);font-weight:600}
+
+  .cityhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .cityhead h2{margin:0}
+
+  /* CHECKLIST */
+  .chkrow{display:flex;align-items:flex-start;gap:11px;padding:8px 0;border-bottom:1px solid var(--line)}
+  .chkrow:last-child{border-bottom:none}
+  .chkrow label{flex:1;cursor:pointer}
+  .chk{width:19px;height:19px;flex:0 0 auto;margin-top:3px;accent-color:var(--accent);cursor:pointer}
+  .dual{display:flex;gap:16px;flex:0 0 auto}
+  .dual span{font-size:.64rem;color:var(--muted);display:block;text-align:center}
+  .progress{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin:8px 0 4px}
+  .progress>i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+  .ptext{font-size:.8rem;color:var(--muted);margin-bottom:8px}
+
+  details.grp{border:1px solid var(--line);border-radius:var(--radius-ctl);margin:12px 0;overflow:hidden}
+  details.grp>summary{cursor:pointer;padding:13px 16px;font-weight:600;background:var(--soft);list-style:none}
+  details.grp>summary::-webkit-details-marker{display:none}
+  details.grp>summary::before{content:"▸";color:var(--muted);display:inline-block;width:1.2em}
+  details.grp[open]>summary::before{content:"▾"}
+  .grpbody{padding:2px 16px 10px}
+
+  /* FORMS */
+  input,select,button.btn{font-family:inherit;font-size:.92rem}
+  input,select{padding:10px;border:1px solid var(--line);border-radius:var(--radius-ctl);background:var(--card);color:var(--ink);width:100%}
+  label.fld{display:block;font-size:.76rem;color:var(--muted);margin:0 0 4px;font-weight:600}
+  .btn{background:var(--accent);color:#fff;border:none;padding:10px 16px;border-radius:var(--radius-ctl);cursor:pointer;font-weight:600}
+  .btn:hover{background:var(--accent-d)}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+  .fx-out{font-size:1.45rem;font-weight:600;color:var(--sea);margin:.3em 0 0}
+
+  .muted{color:var(--muted)}
+  ul.tight{margin:.3em 0;padding-left:1.2em}
+  ul.tight li{margin:.25em 0}
+  .del{color:var(--accent);background:none;border:none;cursor:pointer;font-weight:700;font-size:1rem}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:26px 18px 44px}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>Nossa Viagem · Espanha &amp; Portugal</h1>
+  <p>24 set – 10 out 2026 · 16 noites · casal</p>
+  <div class="countdown" id="countdown">…</div>
+</header>
+
+<nav id="nav">
+  <button class="tab-btn active" data-tab="roteiro" onclick="showTab('roteiro')">Roteiro</button>
+  <button class="tab-btn" data-tab="guia" onclick="showTab('guia')">Guia das cidades</button>
+  <button class="tab-btn" data-tab="custos" onclick="showTab('custos')">Estadia &amp; custos</button>
+  <button class="tab-btn" data-tab="prep" onclick="showTab('prep')">Preparativos</button>
+  <button class="tab-btn" data-tab="docs" onclick="showTab('docs')">Reservas &amp; docs</button>
+</nav>
+
+<main>
+
+<!-- ============ ROTEIRO ============ -->
+<section class="tab-panel active" id="tab-roteiro">
+  <div class="chips">
+    <span class="chip">16 noites</span>
+    <span class="chip">4 cidades</span>
+    <span class="chip accent">~R$ 24,5k · casal</span>
+  </div>
+
+  <div class="card">
+    <h2>✈️ Voos (TAP)</h2>
+    <div class="twrap"><table>
+      <tr><th>Trecho</th><th>Data</th><th>Horário</th><th>Detalhe</th></tr>
+      <tr><td><b>GRU → MAD</b><br><span class="muted">São Paulo → Madri</span></td><td>qui 24/set</td><td>00:45 → 21:25</td><td>15h40 · escala em Lisboa</td></tr>
+      <tr><td><b>BCN → LIS</b><br><span class="muted">Barcelona → Lisboa</span></td><td>qui 01/out</td><td>22:40 → 23:40</td><td>Direto · noturno</td></tr>
+      <tr><td><b>OPO → GRU</b><br><span class="muted">Porto → São Paulo</span></td><td>sáb 10/out</td><td>12:45 → 19:20</td><td>Direto · 10h35</td></tr>
+    </table></div>
+    <div class="callout red">Tarifa <i>Discount</i>: mão 10kg (55×40×25cm) + item pessoal 2kg. Confirmar despacho — costuma vir só nos trechos intercontinentais, não no BCN→LIS.</div>
+  </div>
+
+  <div class="card">
+    <h2>🗺️ Mapa de noites</h2>
+    <div class="twrap"><table>
+      <tr><th>Cidade</th><th>Chega</th><th>Sai</th><th class="num">Noites</th></tr>
+      <tr><td><b>Madri</b></td><td>qui 24/set</td><td>seg 28/set</td><td class="num">4</td></tr>
+      <tr><td><b>Barcelona</b></td><td>seg 28/set</td><td>qui 01/out</td><td class="num">3</td></tr>
+      <tr><td><b>Lisboa</b></td><td>qui 01/out</td><td>ter 06/out</td><td class="num">5</td></tr>
+      <tr><td><b>Porto</b></td><td>ter 06/out</td><td>sáb 10/out</td><td class="num">4</td></tr>
+    </table></div>
+    <p class="muted" style="margin:.6em 0 0">Trechos terrestres a reservar: Madri→Barcelona · Lisboa→Porto (trem)</p>
+  </div>
+
+  <!-- MADRI -->
+  <div class="card">
+    <div class="cityhead"><h2>🏛️ Madri</h2><span class="badge red">4 noites · 24–28/set</span></div>
+    <figure class="photo hero-photo"><img loading="lazy" alt="Palácio Real de Madri" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Palacio_Real_de_Madrid_Julio_2016_%28cropped%29.jpg?width=1000"><figcaption>Palácio Real de Madri</figcaption></figure>
+    <div class="daylist">
+      <div class="day"><div class="dot"><div class="dnum">24</div><div class="dwk">qui</div></div><div class="dbody"><b>Chegada (plano leve)</b>
+        <ul class="tight">
+          <li>21:25 pouso → <b>táxi tarifa fixa €33</b> ao centro (~22:30 no hotel)</li>
+          <li>🍺 ~23h — 1ª <b>caña + tapas</b> numa terraza perto do hotel (Madri janta tarde). Breve volta a pé e dormir.</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">25</div><div class="dwk">sex</div></div><div class="dbody"><b>Centro histórico + pôr do sol no Debod</b>
+        <ul class="tight">
+          <li>🌅 09h — Plaza de Oriente · Jardines de Sabatini · fachada do Palácio Real · Plaza Mayor (antes da multidão)</li>
+          <li>☕ 10h30 — Puerta del Sol · <b>Mercado de San Miguel</b> (petisco)</li>
+          <li>🍽️ 14h — almoço <i>menu del día</i> (Barrio de las Letras / La Latina)</li>
+          <li>🏰 16h — Palácio Real (~€14) ou Parque del Oeste</li>
+          <li>🌇 <b>19h20 — Templo de Debod</b> p/ hora dourada (pôr do sol ~19h55)</li>
+          <li>🍺 21h — jantar + <b>barzinhos em Malasaña</b> (cerveja na terraza); volta a pé pela Gran Vía iluminada</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">26</div><div class="dwk">sáb</div></div><div class="dbody"><b>Bate-volta: Toledo</b> <span class="badge red">no sábado (Catedral com horário cheio)</span>
+        <ul class="tight">
+          <li>🚆 Trem Avant de Atocha (~33 min) ou ônibus ALSA de Plaza Elíptica (~1h). <b>Reservar ida + volta.</b></li>
+          <li>Manhã: cidade murada · museus estatais (Museu do Greco, Santa Cruz — grátis sáb à tarde)</li>
+          <li>🏛️ Tarde: <b>Catedral Primada</b> (~€12)</li>
+          <li>🌇 Fim de tarde: <b>Mirador del Valle</b> (vista sobre o rio Tejo)</li>
+          <li>Volta a Madri à noite · mazapán de sobremesa</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">27</div><div class="dwk">dom</div></div><div class="dbody"><b>Rastro + museus no horário GRÁTIS + Retiro</b>
+        <ul class="tight">
+          <li>🌅 09h30 — <b>El Rastro</b> (feira de domingo, La Latina/Lavapiés)</li>
+          <li>🖼️ 12h30 — <b>Reina Sofía</b> (grátis dom 12h30–14h30): <i>Guernica</i></li>
+          <li>🍽️ 14h — almoço em Lavapiés</li>
+          <li>🌳 16h — <b>Parque del Retiro</b> (Palacio de Cristal, lago)</li>
+          <li>🖼️ 17h–19h — <b>Museu do Prado</b> (grátis dom 17–19h) — ao lado do Retiro</li>
+          <li>🌇 19h15 — pôr do sol c/ cerveja no rooftop <b>Azotea del Círculo de Bellas Artes</b> (~€5)</li>
+          <li>🍷 21h — tapas na <b>Cava Baja</b> (La Latina) + caminhada noturna</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">28</div><div class="dwk">seg</div></div><div class="dbody"><b>→ Barcelona</b>
+        <ul class="tight"><li>Manhã livre / café · trem-bala ~meio-dia (2h30–3h)</li></ul></div></div>
+    </div>
+    <div class="thumbs">
+      <figure class="photo"><img loading="lazy" alt="Plaza Mayor" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Madrid_Plaza_Mayor_%2848733706273%29.jpg?width=1000"><figcaption>Plaza Mayor</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Puerta del Sol" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Puerta_del_Sol_%28Madrid%29_10.jpg?width=1000"><figcaption>Puerta del Sol</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Templo de Debod" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Templo_de_Debod_in_Madrid.jpg?width=1000"><figcaption>Templo de Debod</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Museu do Prado" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Museo_del_Prado_2016_%2825185969599%29.jpg?width=1000"><figcaption>Museu do Prado</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Toledo" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Toledo_%2837737041515%29.jpg?width=1000"><figcaption>Toledo (bate-volta)</figcaption></figure>
+    </div>
+    <details class="mapwrap"><summary>🗺️ Ver no mapa — paradas e rotas</summary>
+      <div class="map" id="map-madri"></div>
+      <p class="maplegend">● paradas na ordem · <b style="color:#6b8e23">╌╌ a pé</b> · <b style="color:#2A7D9B">━━ transporte</b> · toque nos pinos</p>
+    </details>
+  </div>
+
+  <!-- BARCELONA -->
+  <div class="card">
+    <div class="cityhead"><h2>🌇 Barcelona</h2><span class="badge red">3 noites · 28/set–01/out</span></div>
+    <figure class="photo hero-photo"><img loading="lazy" alt="Sagrada Família" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/SF_maig_2_cropped.jpg?width=1000"><figcaption>Sagrada Família</figcaption></figure>
+    <div class="daylist">
+      <div class="day"><div class="dot"><div class="dnum">28</div><div class="dwk">seg</div></div><div class="dbody"><b>Chegada + Bairro Gótico</b>
+        <ul class="tight">
+          <li>~15h — chega em Barcelona-Sants (trem de Madri), metrô até o hotel, largar malas</li>
+          <li>🚶 Tarde — <b>Bairro Gótico</b> (Catedral, Plaça del Rei, Pont del Bisbe) · La Rambla · <b>Mercat de la Boqueria</b></li>
+          <li>🌇 Fim de tarde — terraza no El Born (pôr do sol ~19:25)</li>
+          <li>🍺 Noite — tapas + cava no <b>El Born</b> (El Xampanyet) e bares do Passeig del Born; caminhada noturna pelo Gótico</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">29</div><div class="dwk">ter</div></div><div class="dbody"><b>Dia Gaudí + pôr do sol nos Bunkers</b>
+        <ul class="tight">
+          <li>🌅 08h30 — Passeig de Gràcia cedo (fachadas Casa Batlló + La Pedrera, sem multidão)</li>
+          <li>🎟️ <b>09h30 — Sagrada Família</b> (reservada; manhã = luz linda nos vitrais) ~€26</li>
+          <li>🍽️ 13h — almoço em Gràcia (praças com terraza)</li>
+          <li>🎟️ <b>15h — Park Güell</b> (reservado, horário marcado) ~€18</li>
+          <li>🌇 <b>19h — Bunkers del Carmel</b> p/ o pôr do sol (~19:25) — a melhor vista da cidade (leve algo do mercado; discretos com a bebida)</li>
+          <li>🍺 21h — jantar + cerveja/vermut em <b>Gràcia</b> (Plaça del Sol)</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">30</div><div class="dwk">qua</div></div><div class="dbody"><b>Mar + Montjuïc + pintxos no Poble Sec</b>
+        <ul class="tight">
+          <li>🌅 09h — caminhada na orla: <b>Barceloneta</b> + Port Vell (calmo de manhã)</li>
+          <li>🎨 Tarde — <b>Montjuïc</b>: teleférico/castelo, jardins, MNAC (por fora), Fundació Miró (opcional ~€14)</li>
+          <li>🌇 19h — pôr do sol nas <b>escadarias do MNAC</b> / mirador de Montjuïc</li>
+          <li>🍢 21h — <b>Carrer de Blai (Poble Sec)</b>: pintxos a ~€1-2 + cerveja, rua descolada e barata</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">01</div><div class="dwk">qui</div></div><div class="dbody"><b>Último dia + voo p/ Lisboa</b>
+        <ul class="tight">
+          <li>Check-out de manhã, guardar malas (consigna)</li>
+          <li>🚶 Manhã — Santa Maria del Mar (El Born) · Parc de la Ciutadella · Arc de Triomf</li>
+          <li>🖼️ <b>16h–17h30 — Museu Picasso GRÁTIS</b> (quinta à tarde), no El Born</li>
+          <li>✈️ ~19h — pegar as malas → aeroporto El Prat → voo <b>22:40 → Lisboa 23:40</b></li>
+        </ul></div></div>
+    </div>
+    <div class="thumbs">
+      <figure class="photo"><img loading="lazy" alt="Park Güell" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Parc_guell_-_panoramio.jpg?width=1000"><figcaption>Park Güell</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Casa Batlló" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Casa_Batllo_Overview_Barcelona_Spain_cut.jpg?width=1000"><figcaption>Casa Batlló</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Bairro Gótico" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Barcelona_-_Carrer_del_Bisbe.jpg?width=1000"><figcaption>Bairro Gótico</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Mercat de la Boqueria" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Barcelona_-_Mercat_de_Sant_Josep_%28la_Boqueria%29_-_Entrance.jpg?width=1000"><figcaption>La Boqueria</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Montserrat" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Montserrat_des_de_Manresa.JPG?width=1000"><figcaption>Montserrat</figcaption></figure>
+    </div>
+    <details class="mapwrap"><summary>🗺️ Ver no mapa — paradas e rotas</summary>
+      <div class="map" id="map-barcelona"></div>
+      <p class="maplegend">● paradas na ordem · <b style="color:#6b8e23">╌╌ a pé</b> · <b style="color:#2A7D9B">━━ transporte</b> · toque nos pinos</p>
+    </details>
+  </div>
+
+  <!-- LISBOA -->
+  <div class="card">
+    <div class="cityhead"><h2>🚋 Lisboa</h2><span class="badge sea">5 noites · 01–06/out</span></div>
+    <figure class="photo hero-photo"><img loading="lazy" alt="Torre de Belém" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Bel%C3%A9m_Tower_in_Lisbon%2C_Portugal.jpg?width=1000"><figcaption>Torre de Belém</figcaption></figure>
+    <div class="daylist">
+      <div class="day"><div class="dot"><div class="dnum">01</div><div class="dwk">qui</div></div><div class="dbody"><b>Chegada</b>
+        <ul class="tight"><li>Pousa 23:40 → Uber/táxi ao hotel (~€15-20), dormir</li></ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">02</div><div class="dwk">sex</div></div><div class="dbody"><b>Alfama + miradouros + fado</b>
+        <ul class="tight">
+          <li>🌅 09h — caminhada matinal por <b>Alfama</b> até os miradouros <b>Portas do Sol</b> e <b>Senhora do Monte</b></li>
+          <li>🏰 10h30 — <b>Castelo de São Jorge</b> (bilhete online) · Sé</li>
+          <li>🚋 Tarde — Baixa (Praça do Comércio, Rua Augusta, vista grátis do Carmo) · Chiado · Tram 28</li>
+          <li>🌇 19h — pôr do sol no <b>Miradouro de São Pedro de Alcântara</b></li>
+          <li>🎶 21h — jantar com <b>fado</b> em Alfama + barzinhos no <b>Bairro Alto</b> (copo na rua, tranquilo)</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">03</div><div class="dwk">sáb</div></div><div class="dbody"><b>Belém + LX Factory</b>
+        <ul class="tight">
+          <li>🌅 09h — cedo a Belém: <b>Jerónimos</b> (grátis c/ Lisboa Card, ir cedo) · <b>Torre de Belém</b> · Padrão dos Descobrimentos</li>
+          <li>🥧 <b>Pastéis de Belém</b> na fábrica original</li>
+          <li>🎨 Tarde — <b>LX Factory</b></li>
+          <li>🌇 19h — pôr do sol na orla (Ribeira das Naus)</li>
+          <li>🍺 21h — <b>Time Out Market</b> + bares da <b>Pink Street / Cais do Sodré</b></li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">04</div><div class="dwk">dom</div></div><div class="dbody"><b>Bate-volta Sintra</b>
+        <ul class="tight">
+          <li>🚆 Cedo — trem de Rossio (~40 min). <b>Ir cedo</b> (Pena lota)</li>
+          <li>🏰 <b>Palácio da Pena</b> (reservar horário) → <b>Quinta da Regaleira</b> → Castelo dos Mouros (opcional)</li>
+          <li>🍮 Travesseiros de Sintra (Piriquita) · volta no fim da tarde · jantar tranquilo</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">05</div><div class="dwk">seg</div></div><div class="dbody"><b>Dia de praia: Cascais + Guincho</b> <span class="badge sea">litoral</span>
+        <ul class="tight">
+          <li>🚆 Trem de Cais do Sodré a <b>Cascais</b> (~40 min) — vila charmosa, Praia da Rainha, Boca do Inferno</li>
+          <li>🌊 <b>Praia do Guincho</b> (ônibus/táxi) — praia atlântica selvagem · 🔁 <b>Cabo da Roca</b> (ponto mais ocidental da Europa)</li>
+          <li>ℹ️ Água ~18-19°C em outubro (fria p/ nadar — dia de paisagem/sol/caminhada)</li>
+          <li>🌇 19h — pôr do sol atlântico no <b>Cabo da Roca</b> ou Guincho · volta a Lisboa</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">06</div><div class="dwk">ter</div></div><div class="dbody"><b>→ Porto</b>
+        <ul class="tight"><li>Manhã: último pastel de nata + miradouro · trem pro Porto (~2h50, reservar)</li></ul></div></div>
+    </div>
+    <div class="thumbs">
+      <figure class="photo"><img loading="lazy" alt="Mosteiro dos Jerónimos" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Jer%C3%B3nimos_Monastery_or_Hieronymites_Monastery.png?width=1000"><figcaption>Mosteiro dos Jerónimos</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Castelo de São Jorge" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/LisbonCastle.jpg?width=1000"><figcaption>Castelo de São Jorge</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Tram 28 Lisboa" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Lisbon-Day3-1_%2834184431096%29.jpg?width=1000"><figcaption>Tram 28</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Palácio da Pena, Sintra" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sintra_Portugal_Pal%C3%A1cio_da_Pena-01.jpg?width=1000"><figcaption>Palácio da Pena (Sintra)</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Quinta da Regaleira" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Quinta_da_Regaleira%2C_Sintra%2C_Portugal%2C_2019-05-25%2C_DD_56.jpg?width=1000"><figcaption>Quinta da Regaleira</figcaption></figure>
+    </div>
+    <details class="mapwrap"><summary>🗺️ Ver no mapa — paradas e rotas</summary>
+      <div class="map" id="map-lisboa"></div>
+      <p class="maplegend">● paradas na ordem · <b style="color:#6b8e23">╌╌ a pé</b> · <b style="color:#2A7D9B">━━ transporte</b> · toque nos pinos</p>
+    </details>
+  </div>
+
+  <!-- PORTO -->
+  <div class="card">
+    <div class="cityhead"><h2>🍷 Porto</h2><span class="badge sea">4 noites · 06–10/out</span></div>
+    <figure class="photo hero-photo"><img loading="lazy" alt="Ponte Dom Luís I, Porto" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dom_Lu%C3%ADs_I_Bridge_%2836961760686%29.jpg?width=1000"><figcaption>Ponte Dom Luís I</figcaption></figure>
+    <div class="daylist">
+      <div class="day"><div class="dot"><div class="dnum">06</div><div class="dwk">ter</div></div><div class="dbody"><b>Ribeira + pôr do sol em Gaia</b>
+        <ul class="tight">
+          <li>~15h — chega de trem, check-in</li>
+          <li>🚶 <b>Ribeira</b> (UNESCO) · atravessar a <b>Ponte Dom Luís I</b> a pé (tabuleiro de cima)</li>
+          <li>🌇 18h55 — pôr do sol no <b>Jardim do Morro / cais de Gaia</b> (cartão-postal do Porto à frente)</li>
+          <li>🍺 21h — <b>francesinha</b> + cervejas na beira-rio</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">07</div><div class="dwk">qua</div></div><div class="dbody"><b>Centro histórico + vinho do Porto</b>
+        <ul class="tight">
+          <li>🌅 09h — <b>São Bento</b> (azulejos) · <b>Livraria Lello</b> (bilhete online, ir cedo) · Clérigos · Sé · Mercado do Bolhão</li>
+          <li>🏛️ Palácio da Bolsa (~€12) · Igreja de São Francisco (interior dourado)</li>
+          <li>🍷 Tarde — <b>caves de vinho do Porto em Gaia</b> (Cálem/Graham's/Taylor's) — degustação</li>
+          <li>🌇 19h — pôr do sol nos <b>Jardins do Palácio de Cristal</b></li>
+          <li>🍺 21h — jantar + bares na <b>Galerias de Paris / Cedofeita</b></li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">08</div><div class="dwk">qui</div></div><div class="dbody"><b>Vale do Douro</b> <span class="badge sea">bate-volta</span>
+        <ul class="tight">
+          <li>🚆 Trem de São Bento/Campanhã até <b>Pinhão</b> (~2h, paisagem — sente à direita)</li>
+          <li>🍇 Quinta + degustação · passeio de barco rabelo · almoço com vista das vinhas</li>
+          <li>🔁 Alternativa: tour organizado (2 quintas + almoço + cruzeiro)</li>
+          <li>🌇 Volta no fim da tarde (pôr do sol sobre o Douro) · jantar no Porto</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">09</div><div class="dwk">sex</div></div><div class="dbody"><b>Litoral: Foz + Matosinhos</b> <span class="badge sea">praia + frutos do mar</span>
+        <ul class="tight">
+          <li>🚋 Manhã — <b>Foz do Douro</b> (onde o rio encontra o mar) de tram 1, orla</li>
+          <li>🦐 Almoço — <b>Matosinhos</b>: o melhor peixe grelhado do Porto (metrô)</li>
+          <li>🔁 Alternativa cultural: bate-volta a <b>Guimarães</b> + Braga de trem</li>
+          <li>🌇 18h55 — pôr do sol na <b>Foz</b> · 🍽️ jantar de despedida + vinho do Porto</li>
+        </ul></div></div>
+      <div class="day"><div class="dot"><div class="dnum">10</div><div class="dwk">sáb</div></div><div class="dbody"><b>Volta pra casa</b>
+        <ul class="tight"><li>Sair ~09h30 → voo <b>OPO 12:45 → GRU 19:20</b> 🇧🇷</li></ul></div></div>
+    </div>
+    <div class="thumbs">
+      <figure class="photo"><img loading="lazy" alt="Ribeira do Porto" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Porto_July_2014-34a.jpg?width=1000"><figcaption>Ribeira</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Estação de São Bento" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Esta%C3%A7%C3%A3o_Ferrovi%C3%A1ria_de_Porto_-_S%C3%A3o_Bento.JPG?width=1000"><figcaption>Estação de São Bento</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Livraria Lello" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Lello_Bookshop_9_April_2026.jpg?width=1000"><figcaption>Livraria Lello</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Torre dos Clérigos" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Torre_de_los_Cl%C3%A9rigos%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_01.JPG?width=1000"><figcaption>Torre dos Clérigos</figcaption></figure>
+      <figure class="photo"><img loading="lazy" alt="Vale do Douro" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Alto_Douro_Vinhateiro_visto_de_um_comboio.jpg?width=1000"><figcaption>Vale do Douro</figcaption></figure>
+    </div>
+    <details class="mapwrap"><summary>🗺️ Ver no mapa — paradas e rotas</summary>
+      <div class="map" id="map-porto"></div>
+      <p class="maplegend">● paradas na ordem · <b style="color:#6b8e23">╌╌ a pé</b> · <b style="color:#2A7D9B">━━ transporte</b> · toque nos pinos</p>
+    </details>
+  </div>
+
+  <details class="grp"><summary>🌦️ Clima previsto (fim set / início out)</summary><div class="grpbody">
+    <p class="muted">Médias históricas — outono ameno. A previsão real só sai ~10–14 dias antes.</p>
+    <div class="twrap"><table>
+      <tr><th>Cidade</th><th class="num">Máx</th><th class="num">Mín</th><th>Chuva</th></tr>
+      <tr><td>Madri</td><td class="num">~26°C</td><td class="num">~13°C</td><td><span class="badge ok">baixa</span></td></tr>
+      <tr><td>Barcelona</td><td class="num">~25°C</td><td class="num">~17°C</td><td><span class="badge gold">média</span></td></tr>
+      <tr><td>Lisboa</td><td class="num">~24°C</td><td class="num">~16°C</td><td><span class="badge ok">baixa</span></td></tr>
+      <tr><td>Porto</td><td class="num">~22°C</td><td class="num">~14°C</td><td><span class="badge red">alta</span></td></tr>
+    </table></div>
+    <p class="muted" style="margin-top:10px"><b>🌇 Pôr do sol (aprox.):</b> Madri ~19:55 · Barcelona ~19:25 · Lisboa ~19:00 · Porto ~18:55. <i>(dias encurtam ~1-2 min/dia; sem mudança de horário durante a viagem)</i></p>
+    <p class="muted">Confira perto da data em <a href="https://www.windy.com" target="_blank" rel="noopener">windy.com</a> ou <a href="https://www.accuweather.com" target="_blank" rel="noopener">AccuWeather</a>.</p>
+  </div></details>
+</section>
+
+<!-- ============ GUIA DAS CIDADES ============ -->
+<section class="tab-panel" id="tab-guia">
+  <div class="card">
+    <h2>🧭 Guia das cidades</h2>
+    <p class="muted">O "cardápio" de cada cidade: transporte, o que é grátis (sempre ou em horário certo), o que vale pagar, e o que reservar antes pra economizar. Toque numa cidade para abrir.</p>
+    <p class="muted" style="font-size:.85rem">Legenda: 🆓 grátis · 🕐 grátis em horário certo · 🎟️ paga · 🔖 reservar antes. Preços aproximados (2026) — confirmar perto da data.</p>
+  </div>
+
+  <div class="card">
+    <h3>🎫 City cards — quais valem a pena</h3>
+    <div class="twrap"><table>
+      <tr><th>Cidade</th><th>Card</th><th>Vale?</th></tr>
+      <tr><td>Madri</td><td>Abono / Paseo del Arte</td><td>❌ Não (grátis + a pé)</td></tr>
+      <tr><td>Barcelona</td><td>Barcelona Card / Articket</td><td>❌ Quase nunca (não inclui Sagrada/Güell)</td></tr>
+      <tr><td>Lisboa</td><td><b>Lisboa Card</b></td><td><span class="badge ok">✅ Sim</span></td></tr>
+      <tr><td>Porto</td><td>Porto Card</td><td>🟡 Marginal (só descontos)</td></tr>
+    </table></div>
+    <p class="muted">Único que compensa de verdade: <b>Lisboa Card</b> (Belém + transporte + trem de Sintra grátis) — 48h se Lisboa = 3 noites, 72h se 5. Barcelona: compre Sagrada + Park Güell direto no site oficial. Articket só se fizer 3+ museus de arte. Porto: só se fizer muitas atrações pagas.</p>
+    <div class="callout"><b>🍺 Beber na rua:</b> 🇵🇹 <b>Portugal — pode</b> (Bairro Alto/Cais do Sodré: copo na mão na rua é normal). 🇪🇸 <b>Espanha — cuidado:</b> beber <b>andando</b> na rua/praça é multado (esp. Barcelona), mas <b>terraza de bar é 100% legal</b> — é aí que rola a cerveja de rua. Vinho/lanche do mercado: leve pro apto ou piquenique discreto.</div>
+  </div>
+
+  <details class="grp" open>
+    <summary>🏛️ Madri</summary>
+    <div class="grpbody">
+      <h3>🚇 Transporte</h3>
+      <ul class="tight">
+        <li><b>Do aeroporto (Barajas):</b> metrô L8 (+€3 suplemento) ~€5/pp · Exprés Aeropuerto (ônibus 24h) €5 · <b>táxi tarifa fixa €33</b> ao centro (melhor à noite com mala).</li>
+        <li><b>Na cidade:</b> centro caminhável. <b>Bilhete de 10 viagens</b> (€12,20, compartilhável entre os dois) + cartão Multi €2,50. <b>Pula o abono turístico.</b></li>
+        <li><b>Toledo (bate-volta):</b> trem Avant de <b>Atocha</b> (~€14/pp/trecho, 33 min) ou ônibus ALSA de <b>Plaza Elíptica</b> (~€6/pp/trecho, 1h). Não há metrô até Toledo.</li>
+      </ul>
+      <h3>🆓 Grátis (sempre)</h3>
+      <ul class="tight">
+        <li><b>Templo de Debod</b> (jardins + pôr do sol) · <b>Parque do Retiro</b> · Plaza Mayor · Puerta del Sol · Gran Vía</li>
+        <li><b>Mercado de San Miguel</b> (entrar) · Catedral de la Almudena (donativo) · Parque del Oeste</li>
+        <li>Bairros pra perder-se: <b>La Latina, Malasaña, Barrio de las Letras</b> · <b>El Rastro</b> (feira de domingo de manhã)</li>
+      </ul>
+      <h3>🕐 Grátis em horário certo</h3>
+      <ul class="tight">
+        <li><b>Museu do Prado</b> — grátis seg–sáb <b>18h–20h</b>, dom 17h–19h</li>
+        <li><b>Reina Sofía</b> (Guernica) — grátis seg e qua–sáb <b>19h–21h</b>, dom 12h30–14h30 (fecha terça)</li>
+        <li><b>Thyssen-Bornemisza</b> — grátis <b>segunda 12h–16h</b></li>
+        <li><b>Palácio Real</b> — grátis nas últimas 2h seg–qui p/ cidadãos ibero-americanos (brasileiro costuma entrar) — <b>confirmar na hora</b></li>
+      </ul>
+      <h3>🎟️ Pagas que valem a pena</h3>
+      <ul class="tight">
+        <li><b>Palácio Real</b> ~€14/pp (se não pegar o horário grátis)</li>
+        <li><b>Paseo del Arte</b> ~€32/pp = Prado + Reina Sofía + Thyssen (só se quiser ir de dia, com calma, nos três)</li>
+      </ul>
+      <div class="callout sea"><b>🔖 Reservar &amp; economizar:</b> Madri é tranquila — pouca coisa exige reserva. <b>Prado/Reina Sofía</b>: use os horários grátis (chegue ~30-40 min antes, pega o bilhete grátis na bilheteria/site). <b>Toledo</b>: reserve o trem Avant com antecedência (esgota, sobretudo domingo). <b>Palácio Real</b>: bilhete online evita fila.</div>
+    </div>
+  </details>
+
+  <details class="grp">
+    <summary>🌇 Barcelona</summary>
+    <div class="grpbody">
+      <h3>🚇 Transporte</h3>
+      <ul class="tight">
+        <li><b>Chegada:</b> vocês chegam de <b>trem em Barcelona-Sants</b> (de Madri) — metrô de lá até a hospedagem.</li>
+        <li><b>Na cidade:</b> metrô ótimo. ⚠️ O <b>T-casual</b> (10 viagens, ~€12,15) é <b>individual</b> — cada um precisa do seu (≠ Madri). Alternativa: <b>Hola Barcelona</b> (passe ilimitado 48h/72h ~€17-24, inclui trem do aeroporto).</li>
+        <li><b>Montserrat (bate-volta):</b> trem FGC de Plaça Espanya + cremalheira/teleférico (~€25-35 ida-volta).</li>
+      </ul>
+      <h3>🆓 Grátis (sempre)</h3>
+      <ul class="tight">
+        <li><b>Bunkers del Carmel</b> (mirante, pôr do sol) · praia da <b>Barceloneta</b> · Parc de la Ciutadella</li>
+        <li><b>Bairro Gótico</b> e <b>El Born</b> (caminhar) · La Rambla · <b>Mercat de la Boqueria</b> (entrar)</li>
+        <li>Fachadas de Gaudí (<b>Casa Batlló</b>, <b>La Pedrera</b> por fora) · jardins de Montjuïc · <b>Fonte Mágica</b> (espetáculo grátis à noite, dias certos)</li>
+      </ul>
+      <h3>🕐 Grátis em horário certo</h3>
+      <ul class="tight">
+        <li><b>Museu Picasso</b> — grátis quinta à tarde e domingos a partir das 15h (e 1º domingo do mês)</li>
+        <li><b>MNAC</b> (arte catalã, Montjuïc) — grátis sábado a partir das 15h e 1º domingo do mês</li>
+        <li>Vários museus municipais — grátis <b>1º domingo do mês</b> e domingos após 15h</li>
+      </ul>
+      <h3>🎟️ Pagas que valem a pena (🔖 reservar!)</h3>
+      <ul class="tight">
+        <li><b>🔖 Sagrada Família</b> ~€26/pp (c/ torres ~€40) — <b>esgota, horário marcado</b></li>
+        <li><b>🔖 Park Güell</b> ~€18/pp — cota por horário</li>
+        <li>Hospital de Sant Pau ~€16 (subestimado, lindo) · Palau de la Música ~€22 (tour)</li>
+        <li>Casa Batlló ~€35 / La Pedrera ~€28 — caros; a fachada de graça já entrega muito</li>
+      </ul>
+      <div class="callout sea"><b>🔖 Reservar &amp; economizar:</b> Compre <b>Sagrada Família e Park Güell no site OFICIAL</b>, com semanas de antecedência — mais barato que revendedores (GetYourGuide etc.) e garante o horário. Sagrada <b>de manhã cedo</b> = menos fila e luz melhor nos vitrais. Museus: aproveite <b>domingos após 15h</b> e o 1º domingo do mês.</div>
+    </div>
+  </details>
+
+  <details class="grp">
+    <summary>🚋 Lisboa (+ Sintra)</summary>
+    <div class="grpbody">
+      <h3>🚇 Transporte</h3>
+      <ul class="tight">
+        <li><b>Do aeroporto</b> (chegada ~23h40): metrô linha vermelha ~€1,80 · ou <b>Uber/táxi ~€15-20</b> (melhor à meia-noite com mala).</li>
+        <li><b>Na cidade:</b> cartão <b>Viva Viagem/Navegante</b> (€0,50) + carregar. Bilhete €1,80. <b>Passe 24h €6,80</b> (metrô+bus+tram+elevadores) vale se usar o tram 28 e os elevadores.</li>
+        <li><b>💳 Lisboa Card</b> (24h €27 · 48h €44 · 72h €54): <b>transporte ilimitado + entrada grátis em Jerónimos, Torre de Belém e vários museus + trem grátis pra Sintra/Cascais</b>. É <b>o combo tudo-em-um</b> que Madri não tem.</li>
+      </ul>
+      <h3>🆓 Grátis (sempre)</h3>
+      <ul class="tight">
+        <li><b>Miradouros</b> (Senhora do Monte, Portas do Sol, São Pedro de Alcântara, Graça) · <b>Alfama</b> (perder-se)</li>
+        <li>Praça do Comércio · Rua Augusta · <b>LX Factory</b> · Sé (entrada) · orla do Tejo · Parque Eduardo VII</li>
+        <li>Belém por fora: Mosteiro, Torre e Padrão dos Descobrimentos</li>
+      </ul>
+      <h3>🕐 Grátis em horário certo</h3>
+      <ul class="tight">
+        <li><b>1º domingo do mês</b>: museus e monumentos nacionais grátis (Jerónimos, Torre de Belém, Museu do Azulejo…) — se cair na sua data, aproveite!</li>
+      </ul>
+      <h3>🎟️ Pagas que valem a pena</h3>
+      <ul class="tight">
+        <li><b>Mosteiro dos Jerónimos</b> ~€12 · <b>Torre de Belém</b> ~€8 (ambos grátis c/ Lisboa Card)</li>
+        <li><b>🔖 Castelo de São Jorge</b> ~€15 (vista + história; bilhete com horário online)</li>
+        <li>Museu do Azulejo ~€8 · a vista do Elevador de Santa Justa é acessível de graça por trás, pela Igreja do Carmo</li>
+      </ul>
+      <h3>🏰 Sintra (bate-volta — 🔖 RESERVAR)</h3>
+      <ul class="tight">
+        <li><b>🔖 Palácio da Pena</b> ~€20 (palácio+parque) — <b>reserva com horário online é quase obrigatória</b> (esgota). Vá cedo.</li>
+        <li><b>🔖 Quinta da Regaleira</b> ~€15 (o poço iniciático) — reservar online</li>
+        <li><b>Castelo dos Mouros</b> ~€12 (muralhas + vista) · Palácio Nacional de Sintra ~€10</li>
+      </ul>
+      <div class="callout sea"><b>🔖 Reservar &amp; economizar:</b> Se vão fazer <b>Belém + Sintra</b>, o <b>Lisboa Card 48h/72h se paga</b> (entradas + transporte + trem de Sintra grátis) — comprar online. Em Sintra, comprar os bilhetes dos <b>Parques de Sintra online e ir cedo</b> (evita fila e multidão). Se a data pegar o <b>1º domingo do mês</b>, os museus nacionais saem de graça.</div>
+    </div>
+  </details>
+
+  <details class="grp">
+    <summary>🍷 Porto (+ Douro)</summary>
+    <div class="grpbody">
+      <h3>🚇 Transporte</h3>
+      <ul class="tight">
+        <li><b>Chegada:</b> de <b>trem</b> (de Lisboa) em Campanhã/São Bento. <b>Saída (voo de volta):</b> metrô linha E (violeta) até o aeroporto ~€2,60 (~45 min) · ou Uber/táxi ~€20-25.</li>
+        <li><b>Na cidade:</b> cartão <b>Andante</b> (€0,60) + zapping. Centro compacto e caminhável (mas com ladeiras). <b>Andante Tour</b> 24h €7 / 72h €15 se for usar muito transporte.</li>
+        <li><b>Vale do Douro (bate-volta):</b> trem de Campanhã/São Bento até <b>Pinhão</b> (~€15/pp/trecho, ~2h, paisagem linda — sente à direita).</li>
+      </ul>
+      <h3>🆓 Grátis (sempre)</h3>
+      <ul class="tight">
+        <li><b>Ribeira</b> (UNESCO) · atravessar a <b>Ponte Dom Luís I</b> a pé · <b>Estação de São Bento</b> (azulejos)</li>
+        <li>Miradouro da Vitória · <b>Jardins do Palácio de Cristal</b> · <b>Foz do Douro</b> (orla) · Mercado do Bolhão (entrar)</li>
+      </ul>
+      <h3>🕐 Grátis em horário certo</h3>
+      <ul class="tight">
+        <li><b>Serralves</b> (arte + parque) — grátis domingo de manhã (confirmar janela) · alguns museus municipais grátis em horários certos</li>
+      </ul>
+      <h3>🎟️ Pagas que valem a pena</h3>
+      <ul class="tight">
+        <li><b>🍷 Caves de Vinho do Porto (Gaia)</b> — Cálem/Sandeman/Graham's/Taylor's: visita + degustação ~€15-25/pp — <b>imperdível pro perfil de vocês</b></li>
+        <li><b>🔖 Livraria Lello</b> ~€8 (abatido na compra de livro) — reservar online evita a fila enorme</li>
+        <li><b>Palácio da Bolsa</b> ~€12 (tour) · <b>Torre dos Clérigos</b> ~€8 (subir) · Igreja de São Francisco ~€10 (interior dourado)</li>
+        <li><b>Vale do Douro</b>: trem self-guided + quinta (~€15/pp + degustação) ou tour completo (~€75-100/pp c/ almoço + barco)</li>
+      </ul>
+      <div class="callout sea"><b>🔖 Reservar &amp; economizar:</b> <b>Livraria Lello</b> — bilhete online antecipado (a fila na hora é enorme; o valor abate na compra de um livro). <b>Caves de vinho</b> — reserve a degustação online (algumas esgotam); há combos de várias caves. <b>Douro</b> — reserve o trem cedo (assentos limitados). O centro é a pé, então o Andante Tour só compensa se for muito de metrô/bus.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ ESTADIA & CUSTOS ============ -->
+<section class="tab-panel" id="tab-custos">
+  <div class="chips">
+    <span class="chip">Passagens R$ 8.800</span>
+    <span class="chip">Solo R$ 15.660</span>
+    <span class="chip accent">Total R$ 24.460 · R$ 540 abaixo</span>
+  </div>
+
+  <div class="card">
+    <h3>💱 Câmbio</h3>
+    <div class="grid g2" style="align-items:end">
+      <div><label class="fld">Cotação comercial (R$/€)</label><input id="fxRate" type="number" step="0.01" value="5.85" oninput="fxSave();fxCalc()"></div>
+      <div><label class="fld">Custo no cartão (IOF+spread) %</label><input id="fxPct" type="number" step="0.5" value="6" oninput="fxSave();fxCalc()"></div>
+    </div>
+    <p style="margin:.7em 0 .3em"><button class="btn ghost" onclick="fxFetch()">Buscar cotação atual</button> <span class="muted" id="fxStatus" style="margin-left:6px"></span></p>
+    <p class="muted" style="margin:.2em 0">Efetivo no cartão: <b id="fxEff" style="color:var(--sea)">R$ 6,20</b> / €</p>
+    <div class="grid g2" style="margin-top:8px">
+      <div><label class="fld">Tenho em Euros (€)</label><input id="inEur" type="number" value="100" oninput="fxCalc('eur')"><p class="fx-out" id="outBrl">R$ 620,00</p></div>
+      <div><label class="fld">Tenho em Reais (R$)</label><input id="inBrl" type="number" value="1000" oninput="fxCalc('brl')"><p class="fx-out" id="outEur">€ 161,29</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🏨 Hospedagem</h2>
+    <p class="muted">Misturar pelo melhor preço em cada cidade. Meta total ~€928 (R$ 5.754) nas 16 noites.</p>
+    <div class="twrap"><table>
+      <tr><th>Cidade</th><th>Noites</th><th>Meta/noite</th><th>Formato ideal</th></tr>
+      <tr><td>Madri</td><td>4</td><td>€55–65</td><td><span class="badge ok">Apto c/ cozinha</span></td></tr>
+      <tr><td>Barcelona</td><td>3</td><td>€70–85</td><td><span class="badge gold">Hostel / hotel</span></td></tr>
+      <tr><td>Lisboa</td><td>5</td><td>€48–60</td><td><span class="badge ok">Apto c/ cozinha</span></td></tr>
+      <tr><td>Porto</td><td>4</td><td>€42–55</td><td><span class="badge ok">Apto / hotel</span></td></tr>
+    </table></div>
+    <div class="callout">💡 Apto com cozinha em Madri, Lisboa e Porto (13 das 16 noites) = cozinhar 1 refeição/dia e economizar ~R$ 1.200.</div>
+    <div class="callout sea"><b>Como escolher:</b> reservar com cancelamento grátis (trava o preço) · nota ≥ 8,5 · self check-in / recepção 24h em Lisboa e Madri (chegadas tardias) · no Airbnb comparar o preço total (taxa de limpeza pesa) · reservar na ordem <b>Barcelona → Madri → Lisboa → Porto</b>.</div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card"><h3>Madri — apto</h3><ul class="tight"><li><b>Bairros:</b> Lavapiés, Embajadores, La Latina, Malasaña</li><li><b>Priorize:</b> a pé até Sol/Atocha ou 1 linha de metrô</li><li><b>Evite:</b> entorno imediato da Puerta del Sol</li></ul></div>
+    <div class="card"><h3>Barcelona — hostel/hotel</h3><ul class="tight"><li><b>Bairros:</b> Poble Sec, Sant Antoni, Gràcia</li><li><b>Priorize:</b> perto de metrô; só 3 noites</li><li><b>Evite:</b> Barri Gòtic / La Rambla (caro, barulhento)</li></ul></div>
+    <div class="card"><h3>Lisboa — apto</h3><ul class="tight"><li><b>Bairros:</b> Arroios, Anjos, Graça, Intendente</li><li><b>Priorize:</b> metrô + <b>self check-in</b> (chega ~00h30!)</li><li><b>Evite:</b> núcleo de Alfama se a mala for pesada</li></ul></div>
+    <div class="card"><h3>Porto — apto/hotel</h3><ul class="tight"><li><b>Bairros:</b> Cedofeita, Bonfim, Baixa/Santo Ildefonso</li><li><b>Priorize:</b> perto de São Bento/Aliados</li><li><b>Evite:</b> Ribeira (caro, ladeira puxada)</li></ul></div>
+  </div>
+
+  <div class="card">
+    <h2>💰 Gasto em solo (modo confortável)</h2>
+    <div class="twrap"><table>
+      <tr><th>Categoria</th><th class="num">€ casal</th><th class="num">R$ (×6,20)</th></tr>
+      <tr><td>Hospedagem (16 noites)</td><td class="num">928</td><td class="num">5.754</td></tr>
+      <tr><td>Trens entre cidades</td><td class="num">110</td><td class="num">682</td></tr>
+      <tr><td>Alimentação (16 dias)</td><td class="num">768</td><td class="num">4.762</td></tr>
+      <tr><td>Atrações &amp; passeios</td><td class="num">400</td><td class="num">2.480</td></tr>
+      <tr><td>Transporte local + transfers</td><td class="num">170</td><td class="num">1.054</td></tr>
+      <tr><td>eSIM</td><td class="num">20</td><td class="num">124</td></tr>
+      <tr><td>Seguro viagem</td><td class="num">130</td><td class="num">806</td></tr>
+      <tr><td><b>Subtotal</b></td><td class="num"><b>≈2.526</b></td><td class="num"><b>≈15.660</b></td></tr>
+    </table></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>🎯 Meta diária por cidade (casal)</h3>
+      <div class="twrap"><table>
+        <tr><td>Madri</td><td class="num">~€130 (R$ 806)</td></tr>
+        <tr><td>Barcelona</td><td class="num">~€150 (R$ 930)</td></tr>
+        <tr><td>Lisboa</td><td class="num">~€120 (R$ 744)</td></tr>
+        <tr><td>Porto</td><td class="num">~€120 (R$ 744)</td></tr>
+      </table></div>
+    </div>
+    <div class="card">
+      <h3>🔧 Alavancas de economia</h3>
+      <ul class="tight">
+        <li>Cozinhar 1 refeição/dia → ~R$ 1.200</li>
+        <li>Hospedagem €50/noite → ~R$ 800</li>
+        <li>Douro de trem (não tour) → ~R$ 680</li>
+        <li>Museus nos horários grátis → ~R$ 600</li>
+        <li>Trens reservados cedo → ~R$ 400</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout"><b>💶 Taxa de turismo</b> (paga no check-in, fora da diária): Barcelona ~€4/noite/pessoa · Lisboa €2 · Porto €3 · Madri sem taxa. <b>Total ≈ €68 (R$ 420).</b></div>
+</section>
+
+<!-- ============ PREPARATIVOS ============ -->
+<section class="tab-panel" id="tab-prep">
+  <div class="card">
+    <h2>🧳 Preparativos</h2>
+    <p class="muted">Marque conforme organiza — salva sozinho neste navegador.</p>
+    <div class="progress"><i id="pb-prep"></i></div><div class="ptext" id="pt-prep"></div>
+
+    <details class="grp" open><summary>Documentos &amp; burocracia</summary><div class="grpbody">
+      <div class="chkrow"><input type="checkbox" class="chk" id="pre1"><label for="pre1"><b>Passaporte</b> válido até pelo menos abr/2027 (regra Schengen). Conferir hoje.</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="pre2"><label for="pre2"><b>ETIAS</b> — monitorar site oficial ~1 mês antes (provavelmente ainda não exigido no período)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="pre4"><label for="pre4"><b>Cartão internacional</b> (Wise/Nomad/C6) + euros em espécie · avisar banco</label></div>
+    </div></details>
+
+    <details class="grp"><summary>Bagagem compartilhada (1 para o casal)</summary><div class="grpbody">
+      <div class="chkrow"><input type="checkbox" class="chk" id="s1"><label for="s1">Adaptador de tomada europeu (tipo C/F) — levar 2</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s2"><label for="s2">Carregador multi-USB + cabos</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s3"><label for="s3">Power bank (na mão, nunca despachado)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s4"><label for="s4">Kit primeiros socorros + remédios (dipirona, analgésico, antialérgico, band-aid)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s5"><label for="s5">Guarda-chuva compacto</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s6"><label for="s6">Sacola dobrável + saco para roupa suja</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s7"><label for="s7">Necessaire: pasta de dente, fio dental, cortador de unha</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s8"><label for="s8">Cópias de documentos (papel + foto no celular)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="s9"><label for="s9">Cadeado TSA para bagagem</label></div>
+    </div></details>
+
+    <details class="grp"><summary>Bagagem por pessoa (P1 / P2)</summary><div class="grpbody">
+      <div id="perperson"></div>
+    </div></details>
+
+    <details class="grp"><summary>Comprar lá (não ocupa espaço / mais barato)</summary><div class="grpbody">
+      <p class="muted" style="margin-top:6px">Mercados baratos: <b>Mercadona</b> (ES) · <b>Continente/Pingo Doce</b> (PT).</p>
+      <div class="chkrow"><input type="checkbox" class="chk" id="b1"><label for="b1">Protetor solar, shampoo, sabonete (ou usar os do hotel)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="b2"><label for="b2">Água e lanches (supermercado, não no ponto turístico)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="b3"><label for="b3">Detergente/sabão para lavar roupa no apto</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="b4"><label for="b4">Guarda-chuva extra, se esquecer</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="b5"><label for="b5">Peça de frio, só se a previsão apertar</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="b6"><label for="b6">Mala extra da volta (comprar no Porto, no fim)</label></div>
+    </div></details>
+
+    <div class="callout red" style="margin-top:16px"><b>Bagagem TAP:</b> mão 10kg (55×40×25) + item pessoal 2kg por pessoa. Só bagagem de mão → líquidos ≤ 100ml (leve o mínimo, compre o resto lá).</div>
+    <p class="muted" style="margin-top:8px">🌦️ Clima ameno com amplitude ~10–13°C dia/noite: leve <b>camadas</b> + corta-vento impermeável (chuva no Porto) + calçado confortável.</p>
+  </div>
+
+  <div class="card">
+    <details class="grp" style="margin:0"><summary>🛍️ Lista de compras — trazer na volta</summary><div class="grpbody">
+      <p class="muted" style="margin-top:6px">Compras de fim de viagem (não conta no progresso dos preparativos).</p>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c1"><label for="c1"><b>Vinho do Porto</b> (comprar nas caves de Gaia)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c2"><label for="c2">Vinho espanhol (Rioja/Ribera) ou cava</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c3"><label for="c3">Azeite (português ou espanhol)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c4"><label for="c4">Conservas portuguesas (sardinha/atum)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c5"><label for="c5">Queijo curado (Serra da Estrela / Manchego) — conferir alfândega</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c6"><label for="c6">Doces: turrón (ES), amêndoas, pastelaria</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c7"><label for="c7">Ginjinha (garrafinha de Lisboa)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c8"><label for="c8">Azulejos / cerâmica portuguesa</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c9"><label for="c9">Sabonetes Claus Porto</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c10"><label for="c10">Produtos de cortiça (carteira/bolsa)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c11"><label for="c11">Açafrão espanhol (leve e barato)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c12"><label for="c12">Roupa/moda (Zara/Mango + barato na Espanha)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c13"><label for="c13">Presentes para família/amigos</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="c14"><label for="c14">Lembrancinhas (ímãs, canecas)</label></div>
+      <div class="callout sea"><b>Alfândega (volta ao Brasil):</b> isenção US$ 1.000/pessoa (aéreo) · vinho até 12 L/pessoa · queijos/embutidos podem ser barrados (priorize lacrados). Vinho é líquido → despachar ou free shop. <b>Tax-Free:</b> peça o formulário na loja (passaporte) e valide no aeroporto do <b>Porto</b> (saída da UE).</div>
+    </div></details>
+  </div>
+</section>
+
+<!-- ============ RESERVAS & DOCUMENTOS ============ -->
+<section class="tab-panel" id="tab-docs">
+  <div class="card">
+    <h2>✅ O que reservar</h2>
+    <p class="muted">Marque o que já reservou. Reservar cedo = preço melhor nos trens e evita esgotar os ingressos com horário marcado.</p>
+    <div class="progress"><i id="pb-reservas"></i></div><div class="ptext" id="pt-reservas"></div>
+
+    <details class="grp" open><summary>🚄 Trens</summary><div class="grpbody">
+      <div class="chkrow"><input type="checkbox" class="chk" id="r1"><label for="r1"><b>Madri → Barcelona</b> (AVE / Ouigo / iryo) — 60–90 dias antes</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r2"><label for="r2"><b>Lisboa → Porto</b> (CP Promo) — ~60 dias antes</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r3"><label for="r3">Trem do bate-volta (Toledo/Segovia · Douro/Pinhão)</label></div>
+    </div></details>
+
+    <details class="grp"><summary>🎟️ Atrações com horário marcado</summary><div class="grpbody">
+      <div class="chkrow"><input type="checkbox" class="chk" id="r4"><label for="r4"><b>Sagrada Família</b> (Barcelona)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r5"><label for="r5"><b>Park Güell</b> (Barcelona)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r6"><label for="r6"><b>Palácio da Pena</b> — Sintra</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r7"><label for="r7">Quinta da Regaleira — Sintra</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r8"><label for="r8">Livraria Lello (bilhete) — Porto</label></div>
+    </div></details>
+
+    <details class="grp"><summary>🍷 Passeios &amp; experiências</summary><div class="grpbody">
+      <div class="chkrow"><input type="checkbox" class="chk" id="r9"><label for="r9"><b>Vale do Douro</b> — tour ou trem até Pinhão</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r10"><label for="r10">Degustação nas caves de vinho do Porto (Gaia)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r11"><label for="r11">Castelo de São Jorge (Lisboa) — bilhete online</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r12"><label for="r12">Prado / Reina Sofía — reservar horário</label></div>
+    </div></details>
+
+    <details class="grp"><summary>🛡️ Serviços</summary><div class="grpbody">
+      <div class="chkrow"><input type="checkbox" class="chk" id="r13"><label for="r13">Seguro viagem (casal, 17 dias)</label></div>
+      <div class="chkrow"><input type="checkbox" class="chk" id="r14"><label for="r14">eSIM Europa (Airalo/Holafly)</label></div>
+    </div></details>
+  </div>
+
+  <div class="card">
+    <h3>📄 Registrar reserva</h3>
+    <p class="muted">Adicione localizadores à medida que comprar. Fica salvo neste navegador. Os voos já vêm preenchidos.</p>
+    <div class="grid g2" style="align-items:end">
+      <div><label class="fld">Categoria</label>
+        <select id="dCat"><option>Voos</option><option>Hospedagem</option><option>Trens</option><option>Atrações</option><option>Seguro</option><option>Outros</option></select>
+      </div>
+      <div><label class="fld">Título</label><input id="dTitle" placeholder="Ex: Hotel em Madri"></div>
+      <div><label class="fld">Data / período</label><input id="dDate" placeholder="Ex: 24–28/set"></div>
+      <div><label class="fld">Localizador / código</label><input id="dCode" placeholder="Ex: ABC123"></div>
+      <div><label class="fld">Valor</label><input id="dVal" placeholder="Ex: R$ 1.400 / €80"></div>
+      <div><label class="fld">Link</label><input id="dLink" placeholder="https://..."></div>
+      <div style="grid-column:1/-1"><label class="fld">Observações</label><input id="dObs" placeholder="check-in, endereço, etc."></div>
+    </div>
+    <p style="margin:.7em 0 0"><button class="btn" onclick="addDoc()">+ Adicionar reserva</button></p>
+  </div>
+  <div id="docsRender"></div>
+</section>
+
+</main>
+
+<footer>
+  Painel pessoal da viagem · fotos: Wikimedia Commons · mapas: OpenStreetMap / CARTO<br>
+  Checklists e documentos ficam salvos apenas neste navegador.
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ---------- TABS ---------- */
+function showTab(id){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+  var panel=document.getElementById('tab-'+id); if(panel)panel.classList.add('active');
+  var btn=document.querySelector('.tab-btn[data-tab="'+id+'"]'); if(btn)btn.classList.add('active');
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+  window.scrollTo(0,0);
+}
+
+/* ---------- COUNTDOWN ---------- */
+(function(){
+  var dep=new Date(2026,8,24,0,45), now=new Date();
+  var d=Math.ceil((dep-now)/86400000), el=document.getElementById('countdown');
+  if(d>1) el.textContent='Faltam '+d+' dias';
+  else if(d===1) el.textContent='É amanhã!';
+  else if(d===0) el.textContent='É hoje! Boa viagem!';
+  else el.textContent='Boa viagem!';
+})();
+
+/* ---------- CHECKLISTS (persist) ---------- */
+var CK='viagem_checks_v1';
+function loadChecks(){
+  var m={}; try{m=JSON.parse(localStorage.getItem(CK)||'{}')}catch(e){}
+  document.querySelectorAll('.chk').forEach(function(c){ c.checked=!!m[c.id];
+    c.addEventListener('change',saveChecks); });
+  updateProgress();
+}
+function saveChecks(){
+  var m={}; document.querySelectorAll('.chk').forEach(function(c){ if(c.checked)m[c.id]=1; });
+  try{localStorage.setItem(CK,JSON.stringify(m))}catch(e){}
+  updateProgress();
+}
+function progRe(re,bar,txt){
+  var boxes=Array.prototype.filter.call(document.querySelectorAll('.chk'),function(c){return re.test(c.id)});
+  if(!boxes.length)return;
+  var done=boxes.filter(function(c){return c.checked}).length;
+  var pct=Math.round(done/boxes.length*100);
+  var b=document.getElementById(bar), t=document.getElementById(txt);
+  if(b)b.style.width=pct+'%'; if(t)t.textContent=done+' de '+boxes.length+' ('+pct+'%)';
+}
+function updateProgress(){
+  progRe(/^(pre|s|pp|b)/,'pb-prep','pt-prep');
+  progRe(/^r/,'pb-reservas','pt-reservas');
+}
+
+/* ---------- PER-PERSON PACKING (P1/P2) ---------- */
+var PERSON_ITEMS=[
+  'Passaporte + carteira + cartões','Camisetas / blusas (6–7)','Calça (1–2) + bermuda/short',
+  'Roupa íntima (7–8) e meias','Blusa de frio / moletom','Casaco leve','Corta-vento / capa de chuva',
+  'Pijama','1 look "arrumado" p/ jantar','Tênis confortável (usar no voo)','Sapato leve / sandália',
+  'Óculos de sol','Escova de dente + escova de cabelo','Remédios pessoais','Fones de ouvido','Carregador do celular'
+];
+(function(){
+  var host=document.getElementById('perperson'); if(!host)return;
+  var head=document.createElement('div'); head.className='chkrow';
+  head.innerHTML='<span style="flex:1"></span><div class="dual"><span>P1</span><span>P2</span></div>';
+  host.appendChild(head);
+  PERSON_ITEMS.forEach(function(txt,i){
+    var row=document.createElement('div'); row.className='chkrow';
+    row.innerHTML='<label style="order:-1">'+txt+'</label>'+
+      '<div class="dual" style="align-items:center">'+
+      '<input type="checkbox" class="chk" id="pp'+i+'a">'+
+      '<input type="checkbox" class="chk" id="pp'+i+'b"></div>';
+    host.appendChild(row);
+  });
+})();
+
+/* ---------- CURRENCY ---------- */
+var FX='viagem_fx_v1';
+function fxSave(){ try{localStorage.setItem(FX,JSON.stringify({
+  r:parseFloat(document.getElementById('fxRate').value)||5.85,
+  p:parseFloat(document.getElementById('fxPct').value)||6}))}catch(e){} }
+function fxLoad(){ try{var o=JSON.parse(localStorage.getItem(FX)||'null');
+  if(o){document.getElementById('fxRate').value=o.r;document.getElementById('fxPct').value=o.p;}}catch(e){} }
+function effRate(){
+  var r=parseFloat(document.getElementById('fxRate').value)||5.85;
+  var p=parseFloat(document.getElementById('fxPct').value)||0;
+  return r*(1+p/100);
+}
+function br(n){return 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function eu(n){return '€ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fxCalc(side){
+  var e=effRate();
+  document.getElementById('fxEff').textContent=br(e);
+  var eur=parseFloat(document.getElementById('inEur').value)||0;
+  var brl=parseFloat(document.getElementById('inBrl').value)||0;
+  if(side==='brl'){ document.getElementById('outEur').textContent=eu(brl/e); }
+  else if(side==='eur'){ document.getElementById('outBrl').textContent=br(eur*e); }
+  else { document.getElementById('outBrl').textContent=br(eur*e); document.getElementById('outEur').textContent=eu(brl/e); }
+}
+function fxFetch(){
+  var st=document.getElementById('fxStatus'); st.textContent='buscando…';
+  fetch('https://open.er-api.com/v6/latest/EUR').then(function(r){return r.json()}).then(function(d){
+    if(d&&d.rates&&d.rates.BRL){ apply(d.rates.BRL,d.time_last_update_utc); } else throw 0;
+  }).catch(function(){
+    fetch('https://api.frankfurter.app/latest?from=EUR&to=BRL').then(function(r){return r.json()}).then(function(d){
+      if(d&&d.rates&&d.rates.BRL) apply(d.rates.BRL,d.date); else throw 0;
+    }).catch(function(){ st.textContent='não consegui buscar — edite a cotação manualmente'; });
+  });
+  function apply(rate,when){
+    document.getElementById('fxRate').value=rate.toFixed(2);
+    fxSave(); fxCalc();
+    st.textContent='✔ comercial R$ '+rate.toFixed(2)+' · '+(when||'agora');
+  }
+}
+
+/* ---------- DOCUMENTS ---------- */
+var DK='viagem_docs_v1';
+var DEFAULT_DOCS=[
+  {cat:'Voos',titulo:'TAP GRU→MAD (via Lisboa)',data:'24/set 00:45',codigo:'',val:'R$ 8.800 (casal, ida+volta)',link:'',obs:'Chega 21:25. Mão 10kg + item pessoal.'},
+  {cat:'Voos',titulo:'TAP BCN→LIS',data:'01/out 22:40',codigo:'',val:'',link:'',obs:'Direto, chega 23:40.'},
+  {cat:'Voos',titulo:'TAP OPO→GRU',data:'10/out 12:45',codigo:'',val:'',link:'',obs:'Direto, chega 19:20.'}
+];
+var docs=[];
+function docsLoad(){ try{docs=JSON.parse(localStorage.getItem(DK)||'null')||DEFAULT_DOCS.slice()}catch(e){docs=DEFAULT_DOCS.slice()} }
+function docsSave(){ try{localStorage.setItem(DK,JSON.stringify(docs))}catch(e){} }
+function addDoc(){
+  var g=function(id){return document.getElementById(id).value.trim()};
+  var t=g('dTitle'); if(!t){alert('Dê um título para a reserva.');return;}
+  docs.push({cat:g('dCat'),titulo:t,data:g('dDate'),codigo:g('dCode'),val:g('dVal'),link:g('dLink'),obs:g('dObs')});
+  docsSave(); renderDocs();
+  ['dTitle','dDate','dCode','dVal','dLink','dObs'].forEach(function(id){document.getElementById(id).value=''});
+}
+function delDoc(i){ if(confirm('Remover esta reserva?')){docs.splice(i,1);docsSave();renderDocs();} }
+function renderDocs(){
+  var host=document.getElementById('docsRender'); host.innerHTML='';
+  var cats=['Voos','Hospedagem','Trens','Atrações','Seguro','Outros'];
+  var icon={Voos:'✈️',Hospedagem:'🏨',Trens:'🚄','Atrações':'🎟️',Seguro:'🛡️',Outros:'📎'};
+  cats.forEach(function(cat){
+    var items=docs.map(function(d,i){return {d:d,i:i}}).filter(function(x){return x.d.cat===cat});
+    if(!items.length)return;
+    var card=document.createElement('div'); card.className='card';
+    var h='<h3>'+icon[cat]+' '+cat+'</h3><div class="twrap"><table>'+
+      '<tr><th>Título</th><th>Data</th><th>Código</th><th>Valor</th><th></th></tr>';
+    items.forEach(function(x){
+      var d=x.d;
+      h+='<tr><td><b>'+esc(d.titulo)+'</b>'+(d.obs?'<br><span class="muted">'+esc(d.obs)+'</span>':'')+
+        (d.link?'<br><a href="'+esc(d.link)+'" target="_blank" rel="noopener">abrir link</a>':'')+'</td>'+
+        '<td>'+esc(d.data||'—')+'</td><td>'+esc(d.codigo||'—')+'</td><td>'+esc(d.val||'—')+'</td>'+
+        '<td class="num"><button class="del" title="remover" onclick="delDoc('+x.i+')">✕</button></td></tr>';
+    });
+    h+='</table></div>'; card.innerHTML=h; host.appendChild(card);
+  });
+  if(!docs.length){host.innerHTML='<div class="card muted">Nada adicionado ainda.</div>';}
+}
+function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* ---------- IMAGE FIX (Wikimedia -> Special:FilePath, responde 200) ---------- */
+function fixImages(){
+  document.querySelectorAll('img').forEach(function(im){
+    im.loading='eager';
+    im.onerror=function(){this.style.display='none'};
+    var cur=im.getAttribute('src')||'';
+    var m=cur.match(/\/thumb\/[^/]+\/[^/]+\/(.+?)\/\d+px-/);
+    im.src = m ? ('https://commons.wikimedia.org/wiki/Special:FilePath/'+m[1]+'?width=1000') : cur;
+  });
+}
+
+/* ---------- MAPAS (Leaflet + CARTO Positron, lazy no toggle) ---------- */
+var mapsBuilt={}, leafletMaps={};
+var CITY_MAPS={
+ 'map-madri':{pts:[
+  {n:1,name:'Puerta del Sol',ll:[40.4169,-3.7033],mode:'start',how:'Ponto de partida'},
+  {n:2,name:'Plaza Mayor',ll:[40.4155,-3.7074],mode:'walk',how:'🚶 ~4 min a pé'},
+  {n:3,name:'Mercado de San Miguel',ll:[40.4154,-3.7089],mode:'walk',how:'🚶 2 min a pé'},
+  {n:4,name:'Palácio Real',ll:[40.4180,-3.7143],mode:'walk',how:'🚶 ~8 min a pé'},
+  {n:5,name:'Templo de Debod',ll:[40.4240,-3.7178],mode:'walk',how:'🚶 ~12 min a pé'},
+  {n:6,name:'Museu do Prado',ll:[40.4138,-3.6921],mode:'transport',how:'🚇 metrô/ônibus ~20 min'},
+  {n:7,name:'Parque do Retiro',ll:[40.4152,-3.6845],mode:'walk',how:'🚶 ~8 min a pé'},
+  {n:8,name:'Reina Sofía',ll:[40.4080,-3.6947],mode:'walk',how:'🚶 ~12 min a pé'},
+  {n:9,name:'La Latina (Cava Baja)',ll:[40.4110,-3.7095],mode:'transport',how:'🚇 metrô ~10 min'}
+ ]},
+ 'map-barcelona':{pts:[
+  {n:1,name:'Bairro Gótico / Catedral',ll:[41.3839,2.1762],mode:'start',how:'Ponto de partida'},
+  {n:2,name:'La Boqueria',ll:[41.3818,2.1720],mode:'walk',how:'🚶 ~4 min a pé'},
+  {n:3,name:'Casa Batlló',ll:[41.3917,2.1649],mode:'walk',how:'🚶 ~12 min a pé'},
+  {n:4,name:'Sagrada Família',ll:[41.4036,2.1744],mode:'transport',how:'🚇 metrô L2/L5 ~12 min'},
+  {n:5,name:'Park Güell',ll:[41.4145,2.1527],mode:'transport',how:'🚌 ônibus/metrô ~20 min'},
+  {n:6,name:'Bunkers del Carmel',ll:[41.4194,2.1622],mode:'transport',how:'🚌 ônibus ~15 min'},
+  {n:7,name:'Barceloneta (praia)',ll:[41.3785,2.1925],mode:'transport',how:'🚇 metrô ~25 min'},
+  {n:8,name:'Montjuïc',ll:[41.3641,2.1585],mode:'transport',how:'🚇 metrô + funicular ~20 min'}
+ ]},
+ 'map-lisboa':{pts:[
+  {n:1,name:'Praça do Comércio',ll:[38.7077,-9.1366],mode:'start',how:'Ponto de partida'},
+  {n:2,name:'Sé (Catedral)',ll:[38.7098,-9.1330],mode:'walk',how:'🚶 ~5 min a pé'},
+  {n:3,name:'Castelo de São Jorge',ll:[38.7139,-9.1335],mode:'walk',how:'🚶 ~10 min (subida)'},
+  {n:4,name:'Miradouro Portas do Sol',ll:[38.7118,-9.1300],mode:'walk',how:'🚶 ~6 min a pé'},
+  {n:5,name:'Time Out Market',ll:[38.7071,-9.1459],mode:'transport',how:'🚋 tram 28 ~15 min'},
+  {n:6,name:'Jerónimos (Belém)',ll:[38.6979,-9.2065],mode:'transport',how:'🚋 tram/trem ~25 min'},
+  {n:7,name:'Torre de Belém',ll:[38.6916,-9.2160],mode:'walk',how:'🚶 ~10 min a pé'},
+  {n:8,name:'Bairro Alto (Mir. S. Pedro)',ll:[38.7157,-9.1447],mode:'transport',how:'🚋 tram/metrô ~20 min'}
+ ]},
+ 'map-porto':{pts:[
+  {n:1,name:'Estação de São Bento',ll:[41.1456,-8.6106],mode:'start',how:'Ponto de partida'},
+  {n:2,name:'Torre dos Clérigos',ll:[41.1457,-8.6149],mode:'walk',how:'🚶 ~5 min a pé'},
+  {n:3,name:'Livraria Lello',ll:[41.1466,-8.6148],mode:'walk',how:'🚶 2 min a pé'},
+  {n:4,name:'Mercado do Bolhão',ll:[41.1497,-8.6076],mode:'walk',how:'🚶 ~10 min a pé'},
+  {n:5,name:'Ribeira',ll:[41.1408,-8.6110],mode:'walk',how:'🚶 ~12 min (descida)'},
+  {n:6,name:'Ponte Dom Luís I',ll:[41.1401,-8.6091],mode:'walk',how:'🚶 2 min a pé'},
+  {n:7,name:'Caves de Vinho (Gaia)',ll:[41.1379,-8.6115],mode:'walk',how:'🚶 ~8 min (atravessa a ponte)'}
+ ]}
+};
+function buildMap(id){
+  if(mapsBuilt[id] || typeof L==='undefined' || !CITY_MAPS[id]) return;
+  var el=document.getElementById(id); if(!el) return;
+  mapsBuilt[id]=true;
+  var pts=CITY_MAPS[id].pts;
+  var map=L.map(id,{scrollWheelZoom:false});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+    {maxZoom:19,subdomains:'abcd',attribution:'© OpenStreetMap © CARTO'}).addTo(map);
+  var line=[];
+  pts.forEach(function(p,i){
+    line.push(p.ll);
+    if(i>0){
+      var walk=p.mode!=='transport';
+      L.polyline([pts[i-1].ll,p.ll],{color:walk?'#6b8e23':'#2A7D9B',weight:4,opacity:.85,dashArray:walk?'4,9':null})
+        .addTo(map).bindTooltip(pts[i-1].name+' → '+p.name+'<br>'+p.how);
+    }
+  });
+  pts.forEach(function(p){
+    L.marker(p.ll,{icon:L.divIcon({className:'',iconSize:[26,26],iconAnchor:[13,13],html:'<div style="background:#C0522D;color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)">'+p.n+'</div>'})})
+      .addTo(map).bindPopup('<b>'+p.n+'. '+p.name+'</b><br>'+p.how);
+  });
+  leafletMaps[id]=map;
+  setTimeout(function(){ map.invalidateSize(); map.fitBounds(line,{padding:[30,30]}); },160);
+}
+
+/* ---------- INIT ---------- */
+loadChecks(); fxLoad(); fxCalc(); docsLoad(); renderDocs(); fixImages();
+document.querySelectorAll('details.mapwrap').forEach(function(d){
+  d.addEventListener('toggle',function(){
+    if(!d.open) return;
+    var m=d.querySelector('.map'); if(!m) return;
+    buildMap(m.id);
+    var mp=leafletMaps[m.id];
+    if(mp) setTimeout(function(){ mp.invalidateSize(); mp.fitBounds(CITY_MAPS[m.id].pts.map(function(p){return p.ll}),{padding:[30,30]}); },170);
+  });
+});
+if(location.hash){ showTab(location.hash.slice(1)); }
+</script>
+</body>
+</html>
