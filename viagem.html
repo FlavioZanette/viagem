@@ -163,14 +163,16 @@
   </div>
 
   <div class="card">
-    <h2>✈️ Voos (TAP)</h2>
+    <h2>✈️ Voos</h2>
     <div class="twrap"><table>
       <tr><th>Trecho</th><th>Data</th><th>Horário</th><th>Detalhe</th></tr>
+      <tr><td><b>POA → GRU</b><br><span class="muted">Porto Alegre → São Paulo</span></td><td>qua 23/set</td><td>17:10 → 18:55</td><td>Doméstico · Azul 4453 · 1h45</td></tr>
       <tr><td><b>GRU → MAD</b><br><span class="muted">São Paulo → Madri</span></td><td>qui 24/set</td><td>00:45 → 21:25</td><td>15h40 · escala em Lisboa</td></tr>
       <tr><td><b>BCN → LIS</b><br><span class="muted">Barcelona → Lisboa</span></td><td>qui 01/out</td><td>22:40 → 23:40</td><td>Direto · noturno</td></tr>
       <tr><td><b>OPO → GRU</b><br><span class="muted">Porto → São Paulo</span></td><td>sáb 10/out</td><td>12:45 → 19:20</td><td>Direto · 10h35</td></tr>
     </table></div>
     <div class="callout red">Tarifa <i>Discount</i>: mão 10kg (55×40×25cm) + item pessoal 2kg. Confirmar despacho — costuma vir só nos trechos intercontinentais, não no BCN→LIS.</div>
+    <div class="callout sea"><b>Conexão em GRU (ida):</b> Azul chega 18:55 (23/set) e o TAP embarca 00:45 (24/set) → ~6h de folga. Bilhete separado (autoconexão): pegar a mala e re-despachar no check-in da TAP. Volta doméstica SP→POA ainda a comprar.</div>
   </div>
 
   <div class="card">
@@ -917,6 +919,7 @@ function fxFetch(){
 /* ---------- DOCUMENTS ---------- */
 var DK='viagem_docs_v1';
 var DEFAULT_DOCS=[
+  {cat:'Voos',titulo:'Azul POA→GRU (ida doméstica)',data:'23/set 17:10→18:55',codigo:'',val:'',link:'',obs:'Voo 4453, 1h45. Conecta com TAP GRU→MAD 00:45 (~6h em GRU, bilhete separado).'},
   {cat:'Voos',titulo:'TAP GRU→MAD (via Lisboa)',data:'24/set 00:45',codigo:'',val:'R$ 8.800 (casal, ida+volta)',link:'',obs:'Chega 21:25. Mão 10kg + item pessoal.'},
   {cat:'Voos',titulo:'TAP BCN→LIS',data:'01/out 22:40',codigo:'',val:'',link:'',obs:'Direto, chega 23:40.'},
   {cat:'Voos',titulo:'TAP OPO→GRU',data:'10/out 12:45',codigo:'',val:'',link:'',obs:'Direto, chega 19:20.'},
