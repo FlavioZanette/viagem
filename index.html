@@ -47,6 +47,12 @@
     padding:24px;margin:0 0 24px;box-shadow:var(--shadow)}
   .grid{display:grid;gap:24px}
   @media(min-width:640px){.g2{grid-template-columns:1fr 1fr}}
+  @media(min-width:640px){.g3{grid-template-columns:1fr 1fr 1fr}}
+  .flrow{padding:12px 0;border-top:1px solid var(--line)}
+  .flrow>b{display:block;margin-bottom:7px}
+  .addrow{display:flex;gap:8px;align-items:center;margin:10px 0 2px}
+  .addrow input{flex:1}
+  .addrow .btn{flex:0 0 auto;padding:9px 14px}
 
   .chips{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 24px}
   .chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;
@@ -105,7 +111,7 @@
   .chkrow{display:flex;align-items:flex-start;gap:11px;padding:8px 0;border-bottom:1px solid var(--line)}
   .chkrow:last-child{border-bottom:none}
   .chkrow label{flex:1;cursor:pointer}
-  .chk{width:19px;height:19px;flex:0 0 auto;margin-top:3px;accent-color:var(--accent);cursor:pointer}
+  .chk,.chkb{width:19px;height:19px;flex:0 0 auto;margin-top:3px;accent-color:var(--accent);cursor:pointer}
   .dual{display:flex;gap:16px;flex:0 0 auto}
   .dual span{font-size:.64rem;color:var(--muted);display:block;text-align:center}
   .progress{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin:8px 0 4px}
@@ -543,21 +549,25 @@
     <h2>✈️ Voos</h2>
     <div class="twrap"><table>
       <tr><th>Trecho</th><th>Data</th><th>Horário</th><th>Detalhe</th></tr>
-      <tr><td><b>POA → GRU</b><br><span class="muted">Porto Alegre → São Paulo</span></td><td>qua 23/set</td><td>17:10 → 18:55</td><td>Doméstico · Azul 4453 · 1h45</td></tr>
-      <tr><td><b>GRU → MAD</b><br><span class="muted">São Paulo → Madri</span></td><td>qui 24/set</td><td>00:45 → 21:25</td><td>15h40 · escala em Lisboa</td></tr>
-      <tr><td><b>BCN → LIS</b><br><span class="muted">Barcelona → Lisboa</span></td><td>qui 01/out</td><td>22:40 → 23:40</td><td>Direto · noturno</td></tr>
-      <tr><td><b>OPO → GRU</b><br><span class="muted">Porto → São Paulo</span></td><td>sáb 10/out</td><td>12:45 → 19:20</td><td>Direto · 10h35</td></tr>
+      <tr><td><b>POA → GRU</b><br><span class="muted">Porto Alegre → São Paulo</span></td><td>qua 23/set</td><td>17:10 → 18:55</td><td>Azul 4453 · 1h45 · doméstico</td></tr>
+      <tr><td><b>GRU → MAD</b><br><span class="muted">São Paulo → Madri</span></td><td>qui 24/set</td><td>00:45 → 21:25</td><td>TAP · 15h40 · escala em Lisboa</td></tr>
+      <tr><td><b>BCN → LIS</b><br><span class="muted">Barcelona → Lisboa</span></td><td>qui 01/out</td><td>22:40 → 23:40</td><td>TAP · direto · noturno</td></tr>
+      <tr><td><b>OPO → GRU</b><br><span class="muted">Porto → São Paulo</span></td><td>sáb 10/out</td><td>12:45 → 19:20</td><td>TAP TP93 · direto · 10h35</td></tr>
     </table></div>
     <div class="callout red">Tarifa <i>Discount</i>: mão 10kg (55×40×25cm) + item pessoal 2kg. Confirmar despacho — costuma vir só nos trechos intercontinentais, não no BCN→LIS.</div>
     <div class="callout sea"><b>Conexão em GRU (ida):</b> Azul chega 18:55 (23/set) e o TAP embarca 00:45 (24/set) → ~6h de folga. Bilhete separado (autoconexão): pegar a mala e re-despachar no check-in da TAP. Volta doméstica SP→POA ainda a comprar.</div>
+
+    <h3 style="margin-top:22px">📋 Meus dados de cada voo</h3>
+    <p class="muted" style="margin-top:0">Preencha localizador, assentos e o que quiser lembrar — salva sozinho neste navegador.</p>
+    <div id="flightsEdit"></div>
   </div>
 
   <div class="card">
     <h2>🚄 Trens — ✅ reservados</h2>
     <div class="twrap"><table>
       <tr><th>Trecho</th><th>Data</th><th>Horário</th><th>Detalhe</th></tr>
-      <tr><td><b>Madri → Barcelona</b><br><span class="muted">Atocha → Barcelona-Sants</span></td><td>seg 28/set</td><td>15:52 → 18:54</td><td>Iryo · tarifa Inicial · 3h02 · R$ 456 casal</td></tr>
-      <tr><td><b>Lisboa → Porto</b><br><span class="muted">Santa Apolónia → Campanhã</span></td><td>ter 06/out</td><td>09:30 → 12:43</td><td>CP IC 721 · 3h13 · R$ 191,53 casal</td></tr>
+      <tr><td><b>Madri → Barcelona</b><br><span class="muted">Atocha → Barcelona-Sants</span></td><td>seg 28/set</td><td>15:52 → 18:54</td><td>Iryo · tarifa Inicial · 3h02 · só bagagem de cabine</td></tr>
+      <tr><td><b>Lisboa → Porto</b><br><span class="muted">Santa Apolónia → Campanhã</span></td><td>ter 06/out</td><td>09:30 → 12:43</td><td>CP IC 721 · 3h13 · sem raio-x</td></tr>
     </table></div>
     <div class="callout"><b>Dia 28 (Madri):</b> sair do apto ~14:35 → metrô <b>L1 de Iglesia direto a Atocha</b> (~15 min, sem baldeação) · tem raio-x, estar lá ~15:20. Iryo Inicial = só bagagem de cabine (ok, vamos sem mala despachada).</div>
     <div class="callout sea"><b>Dia 06 (Lisboa):</b> sair ~08:40 → <b>táxi/Uber até Santa Apolónia</b> (~10-15 min, ~€7; metrô é ruim com mala) · CP não tem raio-x, chegar ~09:05 basta.</div>
@@ -613,7 +623,7 @@
     </ul></div>
   </div>
 
-  <div class="callout"><b>💶 Taxa de turismo</b> (paga no check-in, fora da diária): Barcelona ~€4/noite/pessoa · Lisboa €2 · Porto €3 · Madri sem taxa. <b>Total ≈ €68 (R$ 420).</b></div>
+  <div class="callout"><b>💶 Taxa de turismo:</b> Barcelona, Lisboa e Porto cobram taxa municipal <b>por noite e por pessoa, paga no check-in</b> (fora da diária). Madri não cobra. Levem alguns euros em espécie.</div>
 
   <div class="card">
     <h3>📄 Registrar reserva</h3>
@@ -625,7 +635,6 @@
       <div><label class="fld">Título</label><input id="dTitle" placeholder="Ex: Hotel em Madri"></div>
       <div><label class="fld">Data / período</label><input id="dDate" placeholder="Ex: 24–28/set"></div>
       <div><label class="fld">Localizador / código</label><input id="dCode" placeholder="Ex: ABC123"></div>
-      <div><label class="fld">Valor</label><input id="dVal" placeholder="Ex: R$ 1.400 / €80"></div>
       <div><label class="fld">Link</label><input id="dLink" placeholder="https://..."></div>
       <div style="grid-column:1/-1"><label class="fld">Observações</label><input id="dObs" placeholder="check-in, endereço, etc."></div>
     </div>
@@ -676,66 +685,16 @@
 <section class="tab-panel" id="tab-comprar">
   <div class="card">
     <h2>🛒 Falta comprar</h2>
-    <p class="muted">Voos, hospedagens e trens entre cidades já estão ✅ fechados (aba "Transporte &amp; estadia"). Aqui fica só o que ainda falta. 🔴 = esgota, comprar já.</p>
-    <div class="progress"><i id="pb-reservas"></i></div><div class="ptext" id="pt-reservas"></div>
-
-    <details class="grp" open><summary>🎟️ Ingressos com horário marcado — 🔴 esgotam</summary><div class="grpbody">
-      <div class="chkrow"><input type="checkbox" class="chk" id="r4"><label for="r4">🔴 <b>Sagrada Família</b> (Barcelona, dia 29) — ~€26 · reservar horário JÁ, no site oficial</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r5"><label for="r5">🔴 <b>Park Güell</b> (Barcelona, dia 29) — ~€18 · horário marcado</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r6"><label for="r6">🔴 <b>Palácio da Pena</b> (Sintra, dia 04) — ~€20 · lota MUITO, horário obrigatório</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r7"><label for="r7"><b>Quinta da Regaleira</b> (Sintra, dia 04) — ~€15 · online evita fila</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r8"><label for="r8"><b>Livraria Lello</b> (Porto, dia 07) — ~€8 (abate em livro) · online + ir cedo</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r16"><label for="r16"><b>Museu Picasso</b> (Barcelona, dia 01) — grátis quinta 16h, mas <b>slot online limitado</b></label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r11"><label for="r11"><b>Castelo de São Jorge</b> (Lisboa, dia 02) — ~€15 · bilhete online</label></div>
-    </div></details>
-
-    <details class="grp"><summary>🚄 Trens de bate-volta</summary><div class="grpbody">
-      <div class="chkrow"><input type="checkbox" class="chk" id="r3"><label for="r3"><b>Toledo</b> (dia 26) — trem Avant de Atocha, <b>ida+volta</b> (esgota, sobretudo fim de semana)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r15"><label for="r15"><b>Douro → Pinhão</b> (dia 08, se self-guided) — regional CP, compra no dia/online</label></div>
-    </div></details>
-
-    <details class="grp"><summary>🍷 Passeios &amp; experiências</summary><div class="grpbody">
-      <div class="chkrow"><input type="checkbox" class="chk" id="r9"><label for="r9"><b>Vale do Douro</b> (dia 08) — se for <b>tour</b> (2 quintas + almoço + cruzeiro), reservar cedo</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r10"><label for="r10"><b>Caves de vinho em Gaia</b> (dia 07) — Graham's/Taylor's pedem marcação de horário</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r17"><label for="r17"><b>Casa de fado</b> (Lisboa, dia 02) — reservar mesa (as boas lotam)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r12"><label for="r12"><b>Prado / Reina Sofía</b> (Madri) — reservar o slot do horário grátis online</label></div>
-    </div></details>
-
-    <details class="grp"><summary>🎫 Cards &amp; serviços</summary><div class="grpbody">
-      <div class="chkrow"><input type="checkbox" class="chk" id="r18"><label for="r18"><b>Lisboa Card</b> 72h (~€54/pp) — Belém + transporte + trem Sintra (ativa no 1º uso)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r13"><label for="r13"><b>Seguro viagem</b> (casal, 17 dias) — comprar antes de embarcar</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r14"><label for="r14"><b>eSIM</b> — 1GB grátis Omio (cód. OMIO1GB, app Kolet) + eventual complemento</label></div>
-    </div></details>
-
-    <details class="grp"><summary>✈️ Volta ao Brasil (SP)</summary><div class="grpbody">
-      <div class="chkrow"><input type="checkbox" class="chk" id="r19"><label for="r19">🔴 <b>Voo doméstico SP → POA</b> (dom 11/out à noite) — comprar (milhas ou dinheiro; preço só sobe)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="r20"><label for="r20"><b>Hotel 1 noite em SP</b> (sáb 10/out) — perto da Paulista/Jardins p/ passear no domingo</label></div>
-    </div></details>
-
-    <details class="grp"><summary>📄 Documentos &amp; burocracia</summary><div class="grpbody">
-      <div class="chkrow"><input type="checkbox" class="chk" id="pre1"><label for="pre1"><b>Passaporte</b> válido até pelo menos abr/2027 (regra Schengen). Conferir hoje.</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="pre2"><label for="pre2"><b>ETIAS</b> — monitorar site oficial ~1 mês antes (provavelmente ainda não exigido no período)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="pre4"><label for="pre4"><b>Cartão internacional</b> (Wise/Nomad/C6) + euros em espécie · avisar banco</label></div>
-    </div></details>
+    <p class="muted">Voos, hospedagens e trens entre cidades já estão ✅ fechados (aba "Transporte &amp; estadia"). Aqui fica só o que falta — <b>lista editável</b>: marque, adicione ou remova (✕). 🔴 = esgota, comprar já.</p>
+    <div class="progress"><i id="pb-buy"></i></div><div class="ptext" id="pt-buy"></div>
+    <div id="buyList"></div>
+    <p class="muted" style="font-size:.82rem;margin-top:14px">Quer voltar à lista original? <a href="#" onclick="buyReset();return false">restaurar padrão</a></p>
   </div>
 
   <div class="card">
-    <details class="grp" style="margin:0"><summary>🛍️ Compras da volta — souvenirs</summary><div class="grpbody">
-      <p class="muted" style="margin-top:6px">Compras de fim de viagem (não contam no progresso acima).</p>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c1"><label for="c1"><b>Vinho do Porto</b> (comprar nas caves de Gaia)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c2"><label for="c2">Vinho espanhol (Rioja/Ribera) ou cava</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c3"><label for="c3">Azeite (português ou espanhol)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c4"><label for="c4">Conservas portuguesas (sardinha/atum)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c5"><label for="c5">Queijo curado (Serra da Estrela / Manchego) — conferir alfândega</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c6"><label for="c6">Doces: turrón (ES), amêndoas, pastelaria</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c7"><label for="c7">Ginjinha (garrafinha de Lisboa)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c8"><label for="c8">Azulejos / cerâmica portuguesa</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c9"><label for="c9">Sabonetes Claus Porto</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c10"><label for="c10">Produtos de cortiça (carteira/bolsa)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c11"><label for="c11">Açafrão espanhol (leve e barato)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c12"><label for="c12">Roupa/moda (Zara/Mango + barato na Espanha)</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c13"><label for="c13">Presentes para família/amigos</label></div>
-      <div class="chkrow"><input type="checkbox" class="chk" id="c14"><label for="c14">Lembrancinhas (ímãs, canecas)</label></div>
+    <details class="grp" style="margin:0" id="grp-souv"><summary>🛍️ Compras da volta — souvenirs</summary><div class="grpbody">
+      <p class="muted" style="margin-top:6px">Lista editável também (não conta no progresso acima).</p>
+      <div id="buySouv"></div>
       <div class="callout sea"><b>Alfândega (volta ao Brasil):</b> isenção US$ 1.000/pessoa (aéreo) · vinho até 12 L/pessoa · queijos/embutidos podem ser barrados (priorize lacrados). Vinho é líquido → despachar ou free shop. <b>Tax-Free:</b> peça o formulário na loja (passaporte) e valide no aeroporto do <b>Porto</b> (saída da UE).</div>
     </div></details>
   </div>
@@ -791,8 +750,129 @@ function progRe(re,bar,txt){
   var b=document.getElementById(bar), t=document.getElementById(txt);
   if(b)b.style.width=pct+'%'; if(t)t.textContent=done+' de '+boxes.length+' ('+pct+'%)';
 }
-function updateProgress(){
-  progRe(/^(r|pre)/,'pb-reservas','pt-reservas');
+function updateProgress(){ /* barras próprias em renderBuy/renderPack */ }
+
+/* ---------- VOOS: dados editáveis ---------- */
+var FK='viagem_flights_v1';
+var FLIGHTS=[
+ {id:'poagru',tr:'POA → GRU',sub:'Azul 4453 · qua 23/set · 17:10 → 18:55'},
+ {id:'grumad',tr:'GRU → MAD',sub:'TAP · qui 24/set · 00:45 → 21:25 (escala Lisboa)'},
+ {id:'bcnlis',tr:'BCN → LIS',sub:'TAP · qui 01/out · 22:40 → 23:40'},
+ {id:'opogru',tr:'OPO → GRU',sub:'TAP TP93 · sáb 10/out · 12:45 → 19:20'}
+];
+var flData={};
+function flLoad(){ try{flData=JSON.parse(localStorage.getItem(FK)||'{}')||{}}catch(e){flData={}} renderFlights(); }
+function flSave(){ try{localStorage.setItem(FK,JSON.stringify(flData))}catch(e){} }
+function flSet(id,f,v){ if(!flData[id])flData[id]={}; flData[id][f]=v; flSave(); }
+function renderFlights(){
+  var h=document.getElementById('flightsEdit'); if(!h)return;
+  h.innerHTML=FLIGHTS.map(function(f){
+    var d=flData[f.id]||{};
+    function inp(field,ph){
+      return '<input type="text" value="'+esc(d[field]||'')+'" placeholder="'+ph+'" oninput="flSet(\''+f.id+'\',\''+field+'\',this.value)">';
+    }
+    return '<div class="flrow"><b>'+f.tr+' <span class="muted" style="font-weight:400">· '+f.sub+'</span></b>'+
+      '<div class="grid g3">'+
+      '<div><label class="fld">Localizador</label>'+inp('loc','Ex: ABC123')+'</div>'+
+      '<div><label class="fld">Assentos</label>'+inp('seat','Ex: 12A / 12B')+'</div>'+
+      '<div><label class="fld">Anotações</label>'+inp('obs','check-in, bagagem…')+'</div>'+
+      '</div></div>';
+  }).join('');
+}
+
+/* ---------- FALTA COMPRAR: lista editável ---------- */
+var BK='viagem_buy_v1', buy=null;
+var BUY_GROUPS=[
+ {k:'ing',  t:'🎟️ Ingressos com horário marcado — 🔴 esgotam', open:true},
+ {k:'trem', t:'🚄 Trens de bate-volta'},
+ {k:'pass', t:'🍷 Passeios & experiências'},
+ {k:'serv', t:'🎫 Cards & serviços'},
+ {k:'volta',t:'✈️ Volta ao Brasil (SP)'},
+ {k:'doc',  t:'📄 Documentos & burocracia'}
+];
+var BUY_DEFAULT=[
+ {g:'ing',t:'🔴 Sagrada Família (Barcelona, dia 29) — ~€26 · site oficial, horário marcado'},
+ {g:'ing',t:'🔴 Park Güell (Barcelona, dia 29) — ~€18 · cota por horário'},
+ {g:'ing',t:'🔴 Palácio da Pena (Sintra, dia 04) — ~€20 · lota muito, horário obrigatório'},
+ {g:'ing',t:'Quinta da Regaleira (Sintra, dia 04) — ~€15 · online evita fila'},
+ {g:'ing',t:'Livraria Lello (Porto, dia 07) — ~€8 (abate em livro) · online + ir cedo'},
+ {g:'ing',t:'Museu Picasso (Barcelona, dia 01) — grátis quinta 16h, mas slot online é limitado'},
+ {g:'ing',t:'Castelo de São Jorge (Lisboa, dia 02) — ~€15 · bilhete online'},
+ {g:'trem',t:'Toledo (dia 26) — trem Avant de Atocha, ida + volta (esgota)'},
+ {g:'trem',t:'Douro → Pinhão (dia 08, se self-guided) — regional CP, compra no dia'},
+ {g:'pass',t:'Vale do Douro (dia 08) — se for tour (2 quintas + almoço + cruzeiro), reservar cedo'},
+ {g:'pass',t:"Caves de vinho em Gaia (dia 07) — Graham's/Taylor's pedem marcação de horário"},
+ {g:'pass',t:'Casa de fado (Lisboa, dia 02) — reservar mesa (as boas lotam)'},
+ {g:'pass',t:'Prado / Reina Sofía (Madri) — reservar o slot do horário grátis'},
+ {g:'serv',t:'Lisboa Card 72h (~€54/pp) — Belém + transporte + trem de Sintra'},
+ {g:'serv',t:'Seguro viagem (casal, 17 dias) — comprar antes de embarcar'},
+ {g:'serv',t:'eSIM — 1GB grátis Omio (código OMIO1GB, app Kolet) + eventual complemento'},
+ {g:'volta',t:'🔴 Voo doméstico SP → POA (dom 11/out à noite) — milhas ou dinheiro'},
+ {g:'volta',t:'Hotel 1 noite em SP (sáb 10/out) — perto da Paulista/Jardins'},
+ {g:'doc',t:'Passaporte válido até pelo menos abr/2027 (regra Schengen)'},
+ {g:'doc',t:'ETIAS — monitorar site oficial ~1 mês antes'},
+ {g:'doc',t:'Cartão internacional (Wise/Nomad/C6) + euros em espécie · avisar banco'},
+ {g:'souv',t:'Vinho do Porto (comprar nas caves de Gaia)'},
+ {g:'souv',t:'Vinho espanhol (Rioja/Ribera) ou cava'},
+ {g:'souv',t:'Azeite (português ou espanhol)'},
+ {g:'souv',t:'Conservas portuguesas (sardinha/atum)'},
+ {g:'souv',t:'Queijo curado (Serra da Estrela / Manchego) — conferir alfândega'},
+ {g:'souv',t:'Doces: turrón (ES), amêndoas, pastelaria'},
+ {g:'souv',t:'Ginjinha (garrafinha de Lisboa)'},
+ {g:'souv',t:'Azulejos / cerâmica portuguesa'},
+ {g:'souv',t:'Sabonetes Claus Porto'},
+ {g:'souv',t:'Produtos de cortiça (carteira/bolsa)'},
+ {g:'souv',t:'Açafrão espanhol (leve e barato)'},
+ {g:'souv',t:'Roupa/moda (Zara/Mango, + barato na Espanha)'},
+ {g:'souv',t:'Presentes para família/amigos'},
+ {g:'souv',t:'Lembrancinhas (ímãs, canecas)'}
+];
+function buyLoad(){
+  try{buy=JSON.parse(localStorage.getItem(BK)||'null')}catch(e){buy=null}
+  if(!buy||!buy.length) buy=BUY_DEFAULT.map(function(x){return{g:x.g,t:x.t,c:0}});
+  renderBuy();
+}
+function buySave(){ try{localStorage.setItem(BK,JSON.stringify(buy))}catch(e){} }
+function buyReset(){ if(confirm('Restaurar a lista original? Suas alterações serão perdidas.')){ buy=BUY_DEFAULT.map(function(x){return{g:x.g,t:x.t,c:0}}); buySave(); renderBuy(); } }
+function buyAdd(g){
+  var inp=document.getElementById('nb-'+g); if(!inp)return;
+  var t=inp.value.trim(); if(!t)return;
+  buy.push({g:g,t:t,c:0}); inp.value=''; buySave(); renderBuy();
+  var again=document.getElementById('nb-'+g); if(again)again.focus();
+}
+function buyTog(i){ buy[i].c=buy[i].c?0:1; buySave(); renderBuy(); }
+function buyDel(i){ if(confirm('Remover este item?')){ buy.splice(i,1); buySave(); renderBuy(); } }
+function buyRows(g){
+  return buy.map(function(it,i){return {it:it,i:i}}).filter(function(x){return x.it.g===g})
+    .map(function(x){
+      var st=x.it.c?'text-decoration:line-through;color:var(--muted)':'';
+      return '<div class="chkrow"><input type="checkbox" class="chkb"'+(x.it.c?' checked':'')+' onchange="buyTog('+x.i+')">'+
+        '<label style="'+st+'" onclick="buyTog('+x.i+')">'+esc(x.it.t)+'</label>'+
+        '<button class="del" title="remover" onclick="buyDel('+x.i+')">✕</button></div>';
+    }).join('');
+}
+function buyAddRow(g){
+  return '<div class="addrow"><input type="text" id="nb-'+g+'" placeholder="Adicionar item…" '+
+    'onkeydown="if(event.key===\'Enter\')buyAdd(\''+g+'\')">'+
+    '<button class="btn" onclick="buyAdd(\''+g+'\')">+</button></div>';
+}
+function renderBuy(){
+  var host=document.getElementById('buyList');
+  if(host){
+    host.innerHTML=BUY_GROUPS.map(function(gr){
+      var rows=buyRows(gr.k);
+      return '<details class="grp"'+(gr.open?' open':'')+'><summary>'+gr.t+'</summary><div class="grpbody">'+
+        (rows||'<p class="muted" style="margin:8px 0">Nada aqui — tudo comprado! 🎉</p>')+buyAddRow(gr.k)+'</div></details>';
+    }).join('');
+  }
+  var sv=document.getElementById('buySouv');
+  if(sv) sv.innerHTML=buyRows('souv')+buyAddRow('souv');
+  var main=buy.filter(function(x){return x.g!=='souv'});
+  var done=main.filter(function(x){return x.c}).length, tot=main.length;
+  var pct=tot?Math.round(done/tot*100):0;
+  var pb=document.getElementById('pb-buy'), pt=document.getElementById('pt-buy');
+  if(pb)pb.style.width=pct+'%';
+  if(pt)pt.textContent=done+' de '+tot+' comprados ('+pct+'%)';
 }
 
 /* ---------- BAGAGEM EDITÁVEL ---------- */
@@ -885,15 +965,15 @@ function fxFetch(){
 var DK='viagem_docs_v1';
 var DEFAULT_DOCS=[
   {cat:'Voos',titulo:'Azul POA→GRU (ida doméstica)',data:'23/set 17:10→18:55',codigo:'',val:'',link:'',obs:'Voo 4453, 1h45. Conecta com TAP GRU→MAD 00:45 (~6h em GRU, bilhete separado).'},
-  {cat:'Voos',titulo:'TAP GRU→MAD (via Lisboa)',data:'24/set 00:45',codigo:'',val:'R$ 8.800 (casal, ida+volta)',link:'',obs:'Chega 21:25. Mão 10kg + item pessoal.'},
+  {cat:'Voos',titulo:'TAP GRU→MAD (via Lisboa)',data:'24/set 00:45',codigo:'',val:'',link:'',obs:'Chega 21:25. Mão 10kg + item pessoal.'},
   {cat:'Voos',titulo:'TAP BCN→LIS',data:'01/out 22:40',codigo:'',val:'',link:'',obs:'Direto, chega 23:40.'},
   {cat:'Voos',titulo:'TAP OPO→GRU',data:'10/out 12:45',codigo:'',val:'',link:'',obs:'Direto, chega 19:20.'},
-  {cat:'Hospedagem',titulo:'Madri — Airbnb (host Elvis)',data:'24–28/set',codigo:'',val:'R$ 2.500',link:'',obs:'Calle de Modesto Lafuente 7, Chamberí 28010. Check-in ≥14h / out ≤11h.'},
-  {cat:'Hospedagem',titulo:'Barcelona — Airbnb (host Lisbeth)',data:'28/set–01/out',codigo:'',val:'R$ 1.500',link:'',obs:'Carrer del Rector Triadó, Hostafrancs 08014. Check-in ≥16h / out ≤12h. ~10 min a pé de Sants.'},
-  {cat:'Hospedagem',titulo:'Lisboa — Quarto da Sophia (host Rodrigo)',data:'01–06/out',codigo:'',val:'R$ 1.500',link:'',obs:'Rua Francisco Sanches 43, Arroios 1170-141. Check-in ≥15h (cofre) / out ≤10h. Metrô Arroios 2-3 min.'},
-  {cat:'Hospedagem',titulo:'Porto — ML Apartments',data:'06–10/out',codigo:'',val:'R$ 1.800',link:'',obs:'Av. de Fernão de Magalhães 615, Bonfim 4350-086. Check-in ≥15h / out ≤11h. Táxi ~7 min de Campanhã.'},
-  {cat:'Trens',titulo:'Iryo Madri → Barcelona',data:'28/set 15:52→18:54',codigo:'',val:'R$ 456 (casal)',link:'',obs:'Atocha → Barcelona-Sants. Tarifa Inicial (só bagagem de cabine).'},
-  {cat:'Trens',titulo:'CP IC 721 Lisboa → Porto',data:'06/out 09:30→12:43',codigo:'',val:'R$ 191,53 (casal)',link:'',obs:'Santa Apolónia → Campanhã. 3h13. Sem raio-x.'}
+  {cat:'Hospedagem',titulo:'Madri — Airbnb (host Elvis)',data:'24–28/set',codigo:'',val:'',link:'',obs:'Calle de Modesto Lafuente 7, Chamberí 28010. Check-in ≥14h / out ≤11h.'},
+  {cat:'Hospedagem',titulo:'Barcelona — Airbnb (host Lisbeth)',data:'28/set–01/out',codigo:'',val:'',link:'',obs:'Carrer del Rector Triadó, Hostafrancs 08014. Check-in ≥16h / out ≤12h. ~10 min a pé de Sants.'},
+  {cat:'Hospedagem',titulo:'Lisboa — Quarto da Sophia (host Rodrigo)',data:'01–06/out',codigo:'',val:'',link:'',obs:'Rua Francisco Sanches 43, Arroios 1170-141. Check-in ≥15h (cofre) / out ≤10h. Metrô Arroios 2-3 min.'},
+  {cat:'Hospedagem',titulo:'Porto — ML Apartments',data:'06–10/out',codigo:'',val:'',link:'',obs:'Av. de Fernão de Magalhães 615, Bonfim 4350-086. Check-in ≥15h / out ≤11h. Táxi ~7 min de Campanhã.'},
+  {cat:'Trens',titulo:'Iryo Madri → Barcelona',data:'28/set 15:52→18:54',codigo:'',val:'',link:'',obs:'Atocha → Barcelona-Sants. Tarifa Inicial (só bagagem de cabine).'},
+  {cat:'Trens',titulo:'CP IC 721 Lisboa → Porto',data:'06/out 09:30→12:43',codigo:'',val:'',link:'',obs:'Santa Apolónia → Campanhã. 3h13. Sem raio-x.'}
 ];
 var docs=[];
 function docsLoad(){ try{docs=JSON.parse(localStorage.getItem(DK)||'null')||DEFAULT_DOCS.slice()}catch(e){docs=DEFAULT_DOCS.slice()} }
@@ -901,9 +981,9 @@ function docsSave(){ try{localStorage.setItem(DK,JSON.stringify(docs))}catch(e){
 function addDoc(){
   var g=function(id){return document.getElementById(id).value.trim()};
   var t=g('dTitle'); if(!t){alert('Dê um título para a reserva.');return;}
-  docs.push({cat:g('dCat'),titulo:t,data:g('dDate'),codigo:g('dCode'),val:g('dVal'),link:g('dLink'),obs:g('dObs')});
+  docs.push({cat:g('dCat'),titulo:t,data:g('dDate'),codigo:g('dCode'),link:g('dLink'),obs:g('dObs')});
   docsSave(); renderDocs();
-  ['dTitle','dDate','dCode','dVal','dLink','dObs'].forEach(function(id){document.getElementById(id).value=''});
+  ['dTitle','dDate','dCode','dLink','dObs'].forEach(function(id){document.getElementById(id).value=''});
 }
 function delDoc(i){ if(confirm('Remover esta reserva?')){docs.splice(i,1);docsSave();renderDocs();} }
 function renderDocs(){
@@ -915,12 +995,12 @@ function renderDocs(){
     if(!items.length)return;
     var card=document.createElement('div'); card.className='card';
     var h='<h3>'+icon[cat]+' '+cat+'</h3><div class="twrap"><table>'+
-      '<tr><th>Título</th><th>Data</th><th>Código</th><th>Valor</th><th></th></tr>';
+      '<tr><th>Título</th><th>Data</th><th>Código</th><th></th></tr>';
     items.forEach(function(x){
       var d=x.d;
       h+='<tr><td><b>'+esc(d.titulo)+'</b>'+(d.obs?'<br><span class="muted">'+esc(d.obs)+'</span>':'')+
         (d.link?'<br><a href="'+esc(d.link)+'" target="_blank" rel="noopener">abrir link</a>':'')+'</td>'+
-        '<td>'+esc(d.data||'—')+'</td><td>'+esc(d.codigo||'—')+'</td><td>'+esc(d.val||'—')+'</td>'+
+        '<td>'+esc(d.data||'—')+'</td><td>'+esc(d.codigo||'—')+'</td>'+
         '<td class="num"><button class="del" title="remover" onclick="delDoc('+x.i+')">✕</button></td></tr>';
     });
     h+='</table></div>'; card.innerHTML=h; host.appendChild(card);
@@ -1016,7 +1096,7 @@ function buildMap(id){
 }
 
 /* ---------- INIT ---------- */
-loadChecks(); fxLoad(); fxCalc(); docsLoad(); renderDocs(); packLoad(); fixImages();
+loadChecks(); fxLoad(); fxCalc(); docsLoad(); renderDocs(); packLoad(); buyLoad(); flLoad(); fixImages();
 document.querySelectorAll('details.mapwrap').forEach(function(d){
   d.addEventListener('toggle',function(){
     if(!d.open) return;
