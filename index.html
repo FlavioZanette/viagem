@@ -93,6 +93,10 @@
   .map{width:100%;height:340px;border:1px solid var(--line);border-radius:12px;margin-top:10px;overflow:hidden;position:relative;z-index:0}
   .leaflet-popup-content{font-size:.85rem;line-height:1.4}
   .maplegend{font-size:.8rem;color:var(--muted);margin:8px 0 0}
+  .daymap{margin:10px 0 2px}
+  .daymap>summary{font-size:.85rem}
+  .daymap .map{height:250px}
+  a.gmaps{display:inline-block;margin-top:5px;font-weight:600}
 
   /* DAY TIMELINE */
   .daylist{margin-top:6px}
@@ -1042,6 +1046,198 @@ var CITY_MAPS={
   {n:7,name:'Caves de Vinho (Gaia)',ll:[41.1379,-8.6115],mode:'walk',how:'🚶 ~8 min (atravessa a ponte)'}
  ]}
 };
+var DAY_ROUTES={
+ "madri-25":{label:"Centro histórico + Debod",tm:"walking",pts:[
+  {n:1,name:"Plaza de Oriente + Sabatini",ll:[40.41834,-3.7132],mode:"start",how:"🚇 metrô L1+L2 até Ópera, ~18 min"},
+  {n:2,name:"Plaza Mayor",ll:[40.41539,-3.707],mode:"walk",how:"🚶 ~10 min a pé"},
+  {n:3,name:"Puerta del Sol",ll:[40.41686,-3.70388],mode:"walk",how:"🚶 ~5 min a pé"},
+  {n:4,name:"Mercado de San Miguel",ll:[40.41537,-3.70902],mode:"walk",how:"🚶 ~6 min a pé"},
+  {n:5,name:"Almoço: Barrio das Letras",ll:[40.41527,-3.70089],mode:"walk",how:"🚶 ~10 min a pé"},
+  {n:6,name:"Palácio Real",ll:[40.41782,-3.71511],mode:"walk",how:"🚶 ~18 min a pé"},
+  {n:7,name:"Templo de Debod",ll:[40.42407,-3.71761],mode:"walk",how:"🚶 ~10 min a pé"},
+  {n:8,name:"Bares em Malasaña",ll:[40.42671,-3.70423],mode:"walk",how:"🚶 ~17 min a pé"}
+ ]},
+ "madri-26":{label:"Bate-volta a Toledo",tm:"transit",pts:[
+  {n:1,name:"Estação de Atocha",ll:[40.40568,-3.69002],mode:"start",how:"🚇 metrô L1, ~15 min"},
+  {n:2,name:"Estação de Toledo",ll:[39.86238,-4.0112],mode:"transport",how:"🚆 trem Avant, ~33 min"},
+  {n:3,name:"Puerta de Bisagra",ll:[39.8625,-4.02531],mode:"walk",how:"🚶 ~17 min a pé (subida)"},
+  {n:4,name:"Museu do Greco",ll:[39.85586,-4.02877],mode:"walk",how:"🚶 ~20 min a pé"},
+  {n:5,name:"Museu de Santa Cruz",ll:[39.86025,-4.02041],mode:"walk",how:"🚶 ~13 min a pé"},
+  {n:6,name:"Catedral Primada",ll:[39.85691,-4.02427],mode:"walk",how:"🚶 ~7 min a pé"},
+  {n:7,name:"Mirador del Valle",ll:[39.85037,-4.02251],mode:"transport",how:"🚕 táxi/ônibus, ~12 min"},
+  {n:8,name:"Volta: Atocha",ll:[40.40568,-3.69002],mode:"transport",how:"🚆 trem Avant, ~33 min"}
+ ]},
+ "madri-27":{label:"El Rastro + museus + Retiro",tm:"walking",pts:[
+  {n:1,name:"El Rastro (Cascorro)",ll:[40.41058,-3.70732],mode:"start",how:"🚇 L1 até Tirso de Molina, ~15 min"},
+  {n:2,name:"Museu Reina Sofía",ll:[40.40805,-3.69442],mode:"walk",how:"🚶 ~14 min a pé"},
+  {n:3,name:"Almoço em Lavapiés",ll:[40.4084,-3.70096],mode:"walk",how:"🚶 ~8 min a pé"},
+  {n:4,name:"Palacio de Cristal",ll:[40.4136,-3.68206],mode:"transport",how:"🚇 L3+L2 até Retiro, ~15 min"},
+  {n:5,name:"Museu do Prado",ll:[40.41379,-3.69204],mode:"walk",how:"🚶 ~12 min a pé"},
+  {n:6,name:"Azotea Bellas Artes",ll:[40.41827,-3.69636],mode:"walk",how:"🚶 ~10 min a pé"},
+  {n:7,name:"Tapas na Cava Baja",ll:[40.41236,-3.70925],mode:"walk",how:"🚶 ~16 min a pé"}
+ ]},
+ "madri-28":{label:"Chamberí + trem p/ Barcelona",tm:"transit",pts:[
+  {n:1,name:"Hospedagem (Chamberí)",ll:[40.4363,-3.6967],mode:"start",how:"🏠 ponto de partida"},
+  {n:2,name:"Mercado de Chamberí",ll:[40.43616,-3.69752],mode:"walk",how:"🚶 ~2 min a pé"},
+  {n:3,name:"Volta pra pegar as malas",ll:[40.4363,-3.6967],mode:"walk",how:"🚶 ~2 min a pé"},
+  {n:4,name:"Metrô Iglesia (L1)",ll:[40.43526,-3.69901],mode:"walk",how:"🚶 ~4 min a pé"},
+  {n:5,name:"Estação de Atocha",ll:[40.40568,-3.69002],mode:"transport",how:"🚇 metrô L1, ~12 min"}
+ ]},
+ "barcelona-28":{label:"Chegada + noite no Gòtic",tm:"walking",pts:[
+  {n:1,name:"Estação Sants",ll:[41.37901,2.13996],mode:"start",how:"🚆 chegada do trem 18:54"},
+  {n:2,name:"Hospedagem Hostafrancs",ll:[41.3774,2.1437],mode:"walk",how:"🚶 ~10 min a pé"},
+  {n:3,name:"Catedral de Barcelona",ll:[41.38393,2.17655],mode:"transport",how:"🚇 metrô L1 até Catalunya, ~18 min"},
+  {n:4,name:"Plaça Reial",ll:[41.38009,2.17502],mode:"walk",how:"🚶 ~7 min a pé"},
+  {n:5,name:"Bar El Xampanyet",ll:[41.38451,2.18167],mode:"walk",how:"🚶 ~10 min a pé"},
+  {n:6,name:"Passeig del Born",ll:[41.38476,2.18281],mode:"walk",how:"🚶 ~2 min a pé"}
+ ]},
+ "barcelona-29":{label:"Dia Gaudí + pôr do sol nos Bunkers",tm:"transit",pts:[
+  {n:1,name:"Casa Batlló",ll:[41.39154,2.1647],mode:"start",how:"🚇 metrô L2/L3/L4 Passeig de Gràcia"},
+  {n:2,name:"La Pedrera (Casa Milà)",ll:[41.3954,2.16176],mode:"walk",how:"🚶 ~6 min a pé"},
+  {n:3,name:"Sagrada Família",ll:[41.4035,2.17443],mode:"transport",how:"🚇 metrô L5 (Diagonal), ~10 min"},
+  {n:4,name:"Almoço em Gràcia",ll:[41.40022,2.15758],mode:"transport",how:"🚇 metrô L5 + 🚶, ~18 min"},
+  {n:5,name:"Park Güell",ll:[41.41423,2.15246],mode:"transport",how:"🚇 L3 Lesseps + 🚶 subida, ~25 min"},
+  {n:6,name:"Bunkers del Carmel",ll:[41.41926,2.16154],mode:"transport",how:"🚌 bus V17/119 + 🚶, ~25 min"},
+  {n:7,name:"Plaça del Sol",ll:[41.40162,2.15671],mode:"transport",how:"🚌 bus 119 + 🚶, ~25 min"}
+ ]},
+ "barcelona-30":{label:"Mar + Montjuïc + pintxos no Poble Sec",tm:"transit",pts:[
+  {n:1,name:"Praia da Barceloneta",ll:[41.37933,2.19297],mode:"start",how:"🚇 metrô L4 Barceloneta, ~20 min"},
+  {n:2,name:"Port Vell",ll:[41.38033,2.18256],mode:"walk",how:"🚶 ~12 min a pé"},
+  {n:3,name:"La Rambla",ll:[41.38086,2.17339],mode:"walk",how:"🚶 ~10 min a pé"},
+  {n:4,name:"Mercat de la Boqueria",ll:[41.38174,2.17155],mode:"walk",how:"🚶 ~3 min a pé"},
+  {n:5,name:"Castell de Montjuïc",ll:[41.36338,2.16614],mode:"transport",how:"🚇 L3 + funicular + 🚠, ~35 min"},
+  {n:6,name:"Fundació Joan Miró",ll:[41.36864,2.16008],mode:"transport",how:"🚠 teleférico + 🚶, ~15 min"},
+  {n:7,name:"Escadarias do MNAC",ll:[41.3686,2.15346],mode:"walk",how:"🚶 ~12 min a pé pelos jardins"},
+  {n:8,name:"Carrer de Blai",ll:[41.37308,2.16611],mode:"transport",how:"🚶 descida + 🚇 L3 Poble Sec, ~20 min"}
+ ]},
+ "barcelona-01":{label:"Último dia + voo p/ Lisboa",tm:"transit",pts:[
+  {n:1,name:"Santa Maria del Mar",ll:[41.38378,2.18201],mode:"start",how:"🚇 metrô L4 Jaume I, ~25 min"},
+  {n:2,name:"Parc de la Ciutadella",ll:[41.38842,2.18625],mode:"walk",how:"🚶 ~8 min a pé"},
+  {n:3,name:"Arc de Triomf",ll:[41.39105,2.18065],mode:"walk",how:"🚶 ~7 min a pé"},
+  {n:4,name:"Museu Picasso",ll:[41.3851,2.1812],mode:"walk",how:"🚶 ~12 min a pé"},
+  {n:5,name:"Hospedagem (malas)",ll:[41.3774,2.1437],mode:"transport",how:"🚇 L4 + L1 Hostafrancs, ~30 min"},
+  {n:6,name:"Aeroporto El Prat",ll:[41.29694,2.07905],mode:"transport",how:"🚶 até Sants + 🚆 R2 Nord, ~30 min"}
+ ]},
+ "lisboa-02":{label:"Alfama + miradouros + fado",tm:"walking",pts:[
+  {n:1,name:"Mirad. Portas do Sol",ll:[38.71235,-9.13037],mode:"start",how:"🚶 ~25 min a pé da hospedagem"},
+  {n:2,name:"Mirad. Senhora do Monte",ll:[38.71916,-9.13281],mode:"walk",how:"🚶 ~12 min a pé (subida)"},
+  {n:3,name:"Castelo de São Jorge",ll:[38.71393,-9.13348],mode:"walk",how:"🚶 ~12 min a pé"},
+  {n:4,name:"Sé de Lisboa",ll:[38.70982,-9.1328],mode:"walk",how:"🚶 ~8 min a pé (descida)"},
+  {n:5,name:"Praça do Comércio",ll:[38.70779,-9.13655],mode:"walk",how:"🚶 ~6 min a pé"},
+  {n:6,name:"Elevador de Santa Justa",ll:[38.71213,-9.13932],mode:"walk",how:"🚶 ~8 min pela Rua Augusta"},
+  {n:7,name:"Mirad. S. Pedro Alcântara",ll:[38.71544,-9.14405],mode:"walk",how:"🚶 ~15 min via Chiado"},
+  {n:8,name:"Bairro Alto (fado/bares)",ll:[38.71339,-9.14555],mode:"walk",how:"🚶 ~5 min a pé"}
+ ]},
+ "lisboa-03":{label:"Belém + LX Factory",tm:"transit",pts:[
+  {n:1,name:"Mosteiro dos Jerónimos",ll:[38.69776,-9.20662],mode:"start",how:"🚋 metrô + tram 15E, ~40 min"},
+  {n:2,name:"Torre de Belém",ll:[38.69159,-9.21593],mode:"walk",how:"🚶 ~15 min a pé"},
+  {n:3,name:"Padrão dos Descobrimentos",ll:[38.69361,-9.2057],mode:"walk",how:"🚶 ~11 min a pé"},
+  {n:4,name:"Pastéis de Belém",ll:[38.69748,-9.20332],mode:"walk",how:"🚶 ~7 min a pé"},
+  {n:5,name:"LX Factory",ll:[38.7026,-9.17866],mode:"transport",how:"🚋 tram 15E, ~12 min"},
+  {n:6,name:"Ribeira das Naus",ll:[38.70597,-9.13991],mode:"transport",how:"🚋 tram 15E, ~15 min"},
+  {n:7,name:"Time Out Market",ll:[38.70709,-9.1459],mode:"walk",how:"🚶 ~9 min a pé"},
+  {n:8,name:"Pink Street (C. Sodré)",ll:[38.70741,-9.14431],mode:"walk",how:"🚶 ~3 min a pé"}
+ ]},
+ "lisboa-04":{label:"Bate-volta a Sintra",tm:"transit",pts:[
+  {n:1,name:"Estação do Rossio",ll:[38.71422,-9.1409],mode:"start",how:"🚇 metrô ~10 min da hospedagem"},
+  {n:2,name:"Estação de Sintra",ll:[38.79938,-9.38553],mode:"transport",how:"🚆 comboio ~40 min"},
+  {n:3,name:"Palácio da Pena",ll:[38.78757,-9.39056],mode:"transport",how:"🚌 ônibus 434, ~20 min"},
+  {n:4,name:"Quinta da Regaleira",ll:[38.79511,-9.3962],mode:"transport",how:"🚌 434 + 🚶 ~20 min"},
+  {n:5,name:"Castelo dos Mouros",ll:[38.79241,-9.38867],mode:"transport",how:"🚌 434, ~15 min (subida)"},
+  {n:6,name:"Piriquita (travesseiros)",ll:[38.79671,-9.39053],mode:"transport",how:"🚌 434 + 🚶 ~15 min"},
+  {n:7,name:"Rossio (volta)",ll:[38.71422,-9.1409],mode:"transport",how:"🚶 10 min + 🚆 comboio ~40 min"}
+ ]},
+ "lisboa-05":{label:"Cascais + Guincho + Cabo da Roca",tm:"transit",pts:[
+  {n:1,name:"Est. Cais do Sodré",ll:[38.70598,-9.14574],mode:"start",how:"🚇 metrô linha verde, ~12 min"},
+  {n:2,name:"Estação de Cascais",ll:[38.70076,-9.41861],mode:"transport",how:"🚆 comboio ~40 min"},
+  {n:3,name:"Praia da Rainha",ll:[38.69895,-9.41814],mode:"walk",how:"🚶 ~6 min a pé"},
+  {n:4,name:"Boca do Inferno",ll:[38.69112,-9.43082],mode:"walk",how:"🚶 ~20 min pela marginal"},
+  {n:5,name:"Praia do Guincho",ll:[38.73316,-9.47278],mode:"transport",how:"🚌 ônibus 415, ~20 min"},
+  {n:6,name:"Cabo da Roca",ll:[38.7819,-9.49732],mode:"transport",how:"🚌 ônibus 1624, ~25 min"},
+  {n:7,name:"Cascais (volta)",ll:[38.70076,-9.41861],mode:"transport",how:"🚌 ônibus ~40 min"},
+  {n:8,name:"Cais do Sodré (volta)",ll:[38.70598,-9.14574],mode:"transport",how:"🚆 comboio ~40 min"}
+ ]},
+ "lisboa-06":{label:"Saída p/ o Porto",tm:"driving",pts:[
+  {n:1,name:"Hospedagem (Arroios)",ll:[38.7315,-9.1337],mode:"start",how:"🏠 ponto de partida"},
+  {n:2,name:"Est. Santa Apolónia",ll:[38.71411,-9.12291],mode:"transport",how:"🚕 táxi/Uber ~10 min"}
+ ]},
+ "porto-06":{label:"Chegada + Ribeira + pôr do sol em Gaia",tm:"walking",pts:[
+  {n:1,name:"Estação de Porto-Campanhã",ll:[41.14874,-8.58546],mode:"start",how:"🚆 comboio chega 12:43"},
+  {n:2,name:"Hospedagem (Bonfim)",ll:[41.1563,-8.5947],mode:"walk",how:"🚶 ~15 min a pé"},
+  {n:3,name:"Ribeira do Porto",ll:[41.14055,-8.61184],mode:"transport",how:"🚇 metrô até São Bento, ~15 min"},
+  {n:4,name:"Ponte Dom Luís I",ll:[41.13966,-8.60935],mode:"walk",how:"🚶 ~8 min a pé até a ponte"},
+  {n:5,name:"Jardim do Morro (Gaia)",ll:[41.13762,-8.60871],mode:"walk",how:"🚶 ~5 min a pé, pôr do sol 18h55"},
+  {n:6,name:"Cais de Gaia",ll:[41.13786,-8.6193],mode:"walk",how:"🚶 ~12 min a pé descendo"}
+ ]},
+ "porto-07":{label:"Centro histórico + vinho do Porto",tm:"walking",pts:[
+  {n:1,name:"Estação de São Bento",ll:[41.14548,-8.61052],mode:"start",how:"🚇 metrô até São Bento, ~12 min"},
+  {n:2,name:"Livraria Lello + Clérigos",ll:[41.1463,-8.6145],mode:"walk",how:"🚶 ~7 min a pé subindo"},
+  {n:3,name:"Sé do Porto",ll:[41.1428,-8.61121],mode:"walk",how:"🚶 ~9 min a pé"},
+  {n:4,name:"Mercado do Bolhão",ll:[41.14932,-8.60695],mode:"walk",how:"🚶 ~11 min a pé"},
+  {n:5,name:"Bolsa + Igreja S. Francisco",ll:[41.14115,-8.61586],mode:"walk",how:"🚶 ~13 min a pé"},
+  {n:6,name:"Caves Cálem (Gaia)",ll:[41.13802,-8.61098],mode:"walk",how:"🚶 ~18 min pela ponte, piso baixo"},
+  {n:7,name:"Jardins Palácio de Cristal",ll:[41.14703,-8.62628],mode:"transport",how:"🚕 ~12 min de táxi, pôr do sol 19h"},
+  {n:8,name:"Galerias de Paris",ll:[41.14715,-8.61438],mode:"walk",how:"🚶 ~13 min a pé"}
+ ]},
+ "porto-08":{label:"Vale do Douro de comboio",tm:"transit",pts:[
+  {n:1,name:"Estação de Porto-Campanhã",ll:[41.14874,-8.58546],mode:"start",how:"🚶 ~15 min a pé da hospedagem"},
+  {n:2,name:"Estação do Pinhão",ll:[41.1905,-7.54509],mode:"transport",how:"🚆 comboio ~2h10 margeando o Douro"},
+  {n:3,name:"Quinta do Bomfim",ll:[41.18853,-7.53912],mode:"walk",how:"🚶 ~8 min a pé, degustação"},
+  {n:4,name:"Cais Fluvial do Pinhão",ll:[41.18974,-7.54791],mode:"walk",how:"🚶 ~12 min a pé, barco rabelo"},
+  {n:5,name:"Estação do Pinhão (volta)",ll:[41.1905,-7.54509],mode:"walk",how:"🚶 ~5 min a pé"},
+  {n:6,name:"Estação de Porto-Campanhã",ll:[41.14874,-8.58546],mode:"transport",how:"🚆 comboio ~2h10 de volta"}
+ ]},
+ "porto-09":{label:"Foz do Douro + Matosinhos",tm:"transit",pts:[
+  {n:1,name:"Jardim do Passeio Alegre",ll:[41.1483,-8.67102],mode:"start",how:"🚋 bonde 1 pela orla, ~25 min"},
+  {n:2,name:"Farolim de Felgueiras",ll:[41.14672,-8.67732],mode:"walk",how:"🚶 ~8 min a pé pelo molhe"},
+  {n:3,name:"Mercado de Matosinhos",ll:[41.187,-8.6931],mode:"transport",how:"🚌 bus 500, ~20 min, almoço de peixe"},
+  {n:4,name:"Praia de Matosinhos",ll:[41.17654,-8.69274],mode:"walk",how:"🚶 ~13 min a pé até a areia"},
+  {n:5,name:"Foz do Douro (pôr do sol)",ll:[41.15085,-8.66911],mode:"transport",how:"🚌 bus 500, ~20 min, pôr do sol 18h55"},
+  {n:6,name:"Ribeira do Porto (jantar)",ll:[41.14055,-8.61184],mode:"transport",how:"🚌 bus 500 até o centro, ~25 min"}
+ ]},
+ "porto-10":{label:"Volta pra casa",tm:"transit",pts:[
+  {n:1,name:"Hospedagem (Bonfim)",ll:[41.1563,-8.5947],mode:"start",how:"🏨 saída da hospedagem"},
+  {n:2,name:"Estação de Porto-Campanhã",ll:[41.14874,-8.58546],mode:"walk",how:"🚶 ~15 min a pé"},
+  {n:3,name:"Aeroporto Sá Carneiro (OPO)",ll:[41.24896,-8.68028],mode:"transport",how:"🚇 metrô linha E, ~35 min, voo 12:45"}
+ ]}
+};
+
+/* rota do dia -> URL do Google Maps (origem, destino e até 9 waypoints) */
+function gmapsUrl(pts,tm){
+  if(!pts||!pts.length) return '#';
+  var ll=function(p){return p.ll[0]+','+p.ll[1]};
+  var u='https://www.google.com/maps/dir/?api=1&origin='+ll(pts[0])+
+        '&destination='+ll(pts[pts.length-1]);
+  var mid=pts.slice(1,-1);
+  if(mid.length>9) mid=mid.slice(0,9);
+  if(mid.length) u+='&waypoints='+mid.map(ll).join('%7C');
+  return u+'&travelmode='+(tm||'walking');
+}
+/* injeta um <details> com mini-mapa + link do Maps em cada dia do roteiro */
+function injectDayMaps(){
+  document.querySelectorAll('.card').forEach(function(card){
+    var dl=card.querySelector('.daylist'); if(!dl) return;
+    var cityMap=card.querySelector('.mapwrap .map'); if(!cityMap) return;
+    var ck=cityMap.id.replace(/^map-/,'');
+    dl.querySelectorAll('.day').forEach(function(day){
+      var dn=day.querySelector('.dnum'), body=day.querySelector('.dbody');
+      if(!dn||!body) return;
+      var r=DAY_ROUTES[ck+'-'+dn.textContent.trim()]; if(!r) return;
+      var id='map-'+ck+'-'+dn.textContent.trim();
+      CITY_MAPS[id]={pts:r.pts};
+      var det=document.createElement('details');
+      det.className='mapwrap daymap';
+      det.innerHTML='<summary>🗺️ Trajeto do dia · '+r.label+'</summary>'+
+        '<div class="map" id="'+id+'"></div>'+
+        '<p class="maplegend">● paradas na ordem · <b style="color:#6b8e23">╌╌ a pé</b> · '+
+        '<b style="color:#2A7D9B">━━ transporte</b> · toque nos pinos<br>'+
+        '<a class="gmaps" href="'+gmapsUrl(r.pts,r.tm)+'" target="_blank" rel="noopener">'+
+        '📍 Abrir esta rota no Google Maps ↗</a></p>';
+      body.appendChild(det);
+    });
+  });
+}
+
 function buildMap(id){
   if(mapsBuilt[id] || typeof L==='undefined' || !CITY_MAPS[id]) return;
   var el=document.getElementById(id); if(!el) return;
@@ -1074,7 +1270,9 @@ function buildMap(id){
 }
 
 /* ---------- INIT ---------- */
-loadChecks(); fxLoad(); fxCalc(); docsLoad(); renderDocs(); packLoad(); buyLoad(); flLoad(); fixImages();
+loadChecks(); fxLoad(); fxCalc(); docsLoad(); renderDocs(); packLoad(); buyLoad(); flLoad();
+injectDayMaps();
+fixImages();
 document.querySelectorAll('details.mapwrap').forEach(function(d){
   d.addEventListener('toggle',function(){
     if(!d.open) return;
