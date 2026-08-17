@@ -691,13 +691,6 @@
     <p class="muted" style="font-size:.82rem;margin-top:14px">Quer voltar à lista original? <a href="#" onclick="buyReset();return false">restaurar padrão</a></p>
   </div>
 
-  <div class="card">
-    <details class="grp" style="margin:0" id="grp-souv"><summary>🛍️ Compras da volta — souvenirs</summary><div class="grpbody">
-      <p class="muted" style="margin-top:6px">Lista editável também (não conta no progresso acima).</p>
-      <div id="buySouv"></div>
-      <div class="callout sea"><b>Alfândega (volta ao Brasil):</b> isenção US$ 1.000/pessoa (aéreo) · vinho até 12 L/pessoa · queijos/embutidos podem ser barrados (priorize lacrados). Vinho é líquido → despachar ou free shop. <b>Tax-Free:</b> peça o formulário na loja (passaporte) e valide no aeroporto do <b>Porto</b> (saída da UE).</div>
-    </div></details>
-  </div>
 </section>
 
 </main>
@@ -812,24 +805,12 @@ var BUY_DEFAULT=[
  {g:'doc',t:'Passaporte válido até pelo menos abr/2027 (regra Schengen)'},
  {g:'doc',t:'ETIAS — monitorar site oficial ~1 mês antes'},
  {g:'doc',t:'Cartão internacional (Wise/Nomad/C6) + euros em espécie · avisar banco'},
- {g:'souv',t:'Vinho do Porto (comprar nas caves de Gaia)'},
- {g:'souv',t:'Vinho espanhol (Rioja/Ribera) ou cava'},
- {g:'souv',t:'Azeite (português ou espanhol)'},
- {g:'souv',t:'Conservas portuguesas (sardinha/atum)'},
- {g:'souv',t:'Queijo curado (Serra da Estrela / Manchego) — conferir alfândega'},
- {g:'souv',t:'Doces: turrón (ES), amêndoas, pastelaria'},
- {g:'souv',t:'Ginjinha (garrafinha de Lisboa)'},
- {g:'souv',t:'Azulejos / cerâmica portuguesa'},
- {g:'souv',t:'Sabonetes Claus Porto'},
- {g:'souv',t:'Produtos de cortiça (carteira/bolsa)'},
- {g:'souv',t:'Açafrão espanhol (leve e barato)'},
- {g:'souv',t:'Roupa/moda (Zara/Mango, + barato na Espanha)'},
- {g:'souv',t:'Presentes para família/amigos'},
- {g:'souv',t:'Lembrancinhas (ímãs, canecas)'}
 ];
 function buyLoad(){
   try{buy=JSON.parse(localStorage.getItem(BK)||'null')}catch(e){buy=null}
   if(!buy||!buy.length) buy=BUY_DEFAULT.map(function(x){return{g:x.g,t:x.t,c:0}});
+  var n=buy.length; buy=buy.filter(function(x){return x.g!=='souv'});
+  if(buy.length!==n) buySave();
   renderBuy();
 }
 function buySave(){ try{localStorage.setItem(BK,JSON.stringify(buy))}catch(e){} }
@@ -865,10 +846,7 @@ function renderBuy(){
         (rows||'<p class="muted" style="margin:8px 0">Nada aqui — tudo comprado! 🎉</p>')+buyAddRow(gr.k)+'</div></details>';
     }).join('');
   }
-  var sv=document.getElementById('buySouv');
-  if(sv) sv.innerHTML=buyRows('souv')+buyAddRow('souv');
-  var main=buy.filter(function(x){return x.g!=='souv'});
-  var done=main.filter(function(x){return x.c}).length, tot=main.length;
+  var done=buy.filter(function(x){return x.c}).length, tot=buy.length;
   var pct=tot?Math.round(done/tot*100):0;
   var pb=document.getElementById('pb-buy'), pt=document.getElementById('pt-buy');
   if(pb)pb.style.width=pct+'%';
