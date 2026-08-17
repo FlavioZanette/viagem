@@ -434,9 +434,9 @@
 
   <details class="grp" open><summary>💰 Dinheiro — regras rápidas</summary><div class="grpbody">
     <ul class="tight">
-      <li>💳 <b>Quem faz o quê:</b> Wise = principal · ARQ = aproximação e compras online · Nubank Global = reserva · Ultravioleta (crédito) = só emergência/caução · Nomad = não usar.</li>
+      <li>💳 <b>Quem faz o quê:</b> ARQ (físico) = principal, recarregando aos poucos pelo app · Nubank Global = saques + reserva · Ultravioleta (crédito) = só emergência/caução · Nomad = não usar.</li>
       <li>💶 Na maquininha, <b>sempre "pagar em EUR"</b> — se oferecerem converter pra reais, recusem (é taxa escondida de 5-8%).</li>
-      <li>🏧 <b>Dinheiro vivo p/ gorjetas:</b> Wise e Nubank Global dão <b>2 saques grátis/mês cada</b> — 1 saque em Madri + 1 em Lisboa resolve a viagem.</li>
+      <li>🏧 <b>Dinheiro vivo p/ gorjetas:</b> Nubank Global dá <b>2 saques grátis/mês</b> (set + out = até 4 na viagem) — 1 saque em Madri + 1 em Lisboa resolve.</li>
       <li>👫 Plásticos <b>divididos entre os dois</b> e em bolsos diferentes.</li>
       <li>🛡️ Emergência médica: <b>ligar antes</b> — números no card do seguro (aba Reservas).</li>
     </ul>
@@ -980,14 +980,14 @@ var BUY_DEFAULT=[
  {g:'volta',t:'🔴 Voo doméstico SP → POA (dom 11/out à noite) — milhas ou dinheiro'},
  {g:'volta',t:'Hotel 1 noite em SP (sáb 10/out) — perto da Paulista/Jardins'},
  {g:'doc',t:'Passaporte válido até pelo menos abr/2027 (regra Schengen)'},
- {g:'doc',t:'Cartão internacional (Wise/Nomad/C6) + euros em espécie · avisar banco'},
+ {g:'doc',t:'Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'},
  {g:'doc',t:'🏛️ Cartório: declaração de união estável (RG+CPF+comprov. residência) — a apólice AIG exige p/ cobrir a companheira num sinistro; PDF no celular dos dois'},
  {g:'doc',t:"📁 Pasta \"Imigração\" no celular DOS DOIS — criar e conferir os 4 itens abaixo"},
  {g:'doc',t:"📁 Imigração: foto do passaporte (página de dados)"},
  {g:'doc',t:"📁 Imigração: e-tickets TAP ida e volta (PDF)"},
  {g:'doc',t:"📁 Imigração: certificado do seguro — 2 primeiras páginas (frase Schengen + coberturas)"},
  {g:'doc',t:"📁 Imigração: confirmações dos 4 Airbnbs (prints do app)"},
- {g:'doc',t:"📁 Imigração: print de saldo/limite (Wise ou Nubank)"},
+ {g:'doc',t:"📁 Imigração: print de saldo/limite (Nubank ou ARQ)"},
 ];
 function buyLoad(){
   try{buy=JSON.parse(localStorage.getItem(BK)||'null')}catch(e){buy=null}
@@ -995,6 +995,7 @@ function buyLoad(){
   var n=buy.length;
   buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t) && !/ETIAS/i.test(x.t)});
   buy=buy.map(function(x){ if(/Seguro viagem \(casal/.test(x.t)) x.t='Seguro viagem GRÁTIS do Mastercard Black: emitir certificado no portal AIG (passagens pagas no UV ✅) — salvar PDF no celular dos dois'; return x; });
+  buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); return x; });
   if(buy.length!==n) buySave();
   try{
     if(!localStorage.getItem('viagem_mig_ue')){
@@ -1006,7 +1007,7 @@ function buyLoad(){
   try{
     if(!localStorage.getItem('viagem_mig_imig')){
       if(!buy.some(function(x){return /Imigra\u00e7\u00e3o:/.test(x.t)||/Pasta \"Imigra/.test(x.t)}))
-        ["📁 Pasta \"Imigração\" no celular DOS DOIS — criar e conferir os 4 itens abaixo","📁 Imigração: foto do passaporte (página de dados)","📁 Imigração: e-tickets TAP ida e volta (PDF)","📁 Imigração: certificado do seguro — 2 primeiras páginas (frase Schengen + coberturas)","📁 Imigração: confirmações dos 4 Airbnbs (prints do app)","📁 Imigração: print de saldo/limite (Wise ou Nubank)"].forEach(function(t){buy.push({g:'doc',t:t,c:0})});
+        ["📁 Pasta \"Imigração\" no celular DOS DOIS — criar e conferir os 4 itens abaixo","📁 Imigração: foto do passaporte (página de dados)","📁 Imigração: e-tickets TAP ida e volta (PDF)","📁 Imigração: certificado do seguro — 2 primeiras páginas (frase Schengen + coberturas)","📁 Imigração: confirmações dos 4 Airbnbs (prints do app)","📁 Imigração: print de saldo/limite (Nubank ou ARQ)"].forEach(function(t){buy.push({g:'doc',t:t,c:0})});
       localStorage.setItem('viagem_mig_imig','1'); buySave();
     }
   }catch(e){}
