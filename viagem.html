@@ -284,21 +284,23 @@
           <li>🌃 Noite — jantar + <b>caminhada noturna pelo Bairro Gótico</b> (Catedral iluminada, Plaça Reial) e <b>El Born</b></li>
           <li>🍺 Tapas + cava no <b>El Xampanyet</b> (El Born) e bares do Passeig del Born</li>
         </ul></div></div>
-      <div class="day"><div class="dot"><div class="dnum">29</div><div class="dwk">ter</div></div><div class="dbody"><b>Dia Gaudí + pôr do sol nos Bunkers</b>
+      <div class="day"><div class="dot"><div class="dnum">29</div><div class="dwk">ter</div></div><div class="dbody"><b>Modernismo + pôr do sol nos Bunkers</b>
         <ul class="tight">
           <li>🌅 08h30 — Passeig de Gràcia cedo (fachadas Casa Batlló + La Pedrera, sem multidão)</li>
-          <li>🎟️ <b>09h30 — Sagrada Família</b> (reservada; manhã = luz linda nos vitrais) ~€26</li>
-          <li>🍽️ 13h — almoço em Gràcia (praças com terraza)</li>
-          <li>🎟️ <b>15h — Park Güell</b> (reservado, horário marcado) ~€18</li>
-          <li>🌇 <b>19h — Bunkers del Carmel</b> p/ o pôr do sol (~19:25) — a melhor vista da cidade (leve algo do mercado; discretos com a bebida)</li>
+          <li>🏛️ 10h — <b>Sant Pau Recinte Modernista</b> (~€16) — UNESCO, quase vazio, o achado da viagem</li>
+          <li>🍽️ 12h30 — Gràcia: Plaça del Sol, Plaça de la Vila + almoço em praça com terraza</li>
+          <li>🎟️ <b>15h — Park Güell</b> (horário marcado) ~€18</li>
+          <li>🌇 <b>19h — Bunkers del Carmel</b> p/ o pôr do sol (~19:38) — a melhor vista da cidade (leve algo do mercado; discretos com a bebida)</li>
           <li>🍺 21h — jantar + cerveja/vermut em <b>Gràcia</b> (Plaça del Sol)</li>
         </ul></div></div>
-      <div class="day"><div class="dot"><div class="dnum">30</div><div class="dwk">qua</div></div><div class="dbody"><b>Mar + Montjuïc + pintxos no Poble Sec</b>
+      <div class="day"><div class="dot"><div class="dnum">30</div><div class="dwk">qua</div></div><div class="dbody"><b>Montjuïc + mar + Sagrada Família na luz dourada</b> <span class="badge red">✅ 17:30 reservado</span>
         <ul class="tight">
-          <li>🌅 09h — caminhada na orla: <b>Barceloneta</b> + Port Vell (calmo de manhã) → subir a <b>La Rambla</b> até o <b>Mercat de la Boqueria</b></li>
-          <li>🎨 Tarde — <b>Montjuïc</b>: teleférico/castelo, jardins, MNAC (por fora), Fundació Miró (opcional ~€14)</li>
-          <li>🌇 19h — pôr do sol nas <b>escadarias do MNAC</b> / mirador de Montjuïc</li>
-          <li>🍢 21h — <b>Carrer de Blai (Poble Sec)</b>: pintxos a ~€1-2 + cerveja, rua descolada e barata</li>
+          <li>🌅 08h45 — <b>Montjuïc</b> de manhã: funicular → <b>Castell</b> (vista do porto), jardins, <b>Fundació Miró</b> (opcional ~€14)</li>
+          <li>⛲ 12h — descer por MNAC (por fora) e <b>Font Màgica</b></li>
+          <li>🍽️ 13h — <b>La Rambla</b> + almoço no <b>Mercat de la Boqueria</b></li>
+          <li>🏖️ 15h — orla: <b>Port Vell</b> + praia da <b>Barceloneta</b> (pé na água)</li>
+          <li>🎟️ <b>17h30 — SAGRADA FAMÍLIA</b> (entrada reservada, €26 c/ audioguia em <b>português</b>) — chegue 17h15. Tour livre até fechar às 20h: a nave pega a <b>luz dourada dos vitrais da fachada da Paixão entre 17h30 e 18h45</b> 🔥</li>
+          <li>🍢 20h15 — <b>Carrer de Blai (Poble Sec)</b>: pintxos a ~€1-2 + cerveja — e volta <b>a pé</b> pra casa (fica ao lado de Hostafrancs)</li>
         </ul></div></div>
       <div class="day"><div class="dot"><div class="dnum">01</div><div class="dwk">qui</div></div><div class="dbody"><b>Último dia + voo p/ Lisboa</b>
         <ul class="tight">
@@ -567,6 +569,14 @@
   </div>
 
   <div class="card">
+    <h2>🛂 Documentos do casal</h2>
+    <p class="muted">Passaporte, seguro, contatos de emergência. Guardado <b>só neste navegador</b> — não vai para o site publicado nem para o GitHub.</p>
+    <div id="idsEdit"></div>
+    <div class="callout red"><b>⚠️ Nunca cole número de passaporte direto no HTML.</b> O repositório é público: iria para a internet e ficaria no histórico do git para sempre. Preenchendo aqui, os dados ficam apenas no aparelho onde você digitou.</div>
+    <p class="muted" style="font-size:.82rem">Preencha no <b>celular que você leva na viagem</b> — é onde você vai precisar consultar. Dica: guarde também uma foto do passaporte no celular e no e-mail.</p>
+  </div>
+
+  <div class="card">
     <h2>🚄 Trens — ✅ reservados</h2>
     <div class="twrap"><table>
       <tr><th>Trecho</th><th>Data</th><th>Horário</th><th>Detalhe</th></tr>
@@ -749,6 +759,42 @@ function progRe(re,bar,txt){
 }
 function updateProgress(){ /* barras próprias em renderBuy/renderPack */ }
 
+/* ---------- DOCUMENTOS (apenas localStorage, nunca no HTML) ---------- */
+var IK='viagem_ids_v1';
+var ID_PEOPLE=[{k:'p1',label:'Pessoa 1'},{k:'p2',label:'Pessoa 2'}];
+var ID_FIELDS=[
+  {f:'nome',  lb:'Nome completo',      ph:'como está no passaporte'},
+  {f:'pass',  lb:'Nº do passaporte',   ph:'ex: AB123456'},
+  {f:'val',   lb:'Validade',           ph:'mm/aaaa'},
+  {f:'nasc',  lb:'Nascimento',         ph:'dd/mm/aaaa'},
+  {f:'seguro',lb:'Seguro (apólice)',   ph:'nº da apólice'},
+  {f:'obs',   lb:'Outros / emergência',ph:'contato, alergia…'}
+];
+var idsData={};
+function idsLoad(){ try{idsData=JSON.parse(localStorage.getItem(IK)||'{}')||{}}catch(e){idsData={}} renderIds(); }
+function idsSave(){ try{localStorage.setItem(IK,JSON.stringify(idsData))}catch(e){} }
+function idsSet(k,f,v){ if(!idsData[k])idsData[k]={}; idsData[k][f]=v; idsSave(); }
+function idsClear(){
+  if(confirm('Apagar todos os documentos salvos neste navegador?')){
+    idsData={}; idsSave(); renderIds();
+  }
+}
+function renderIds(){
+  var h=document.getElementById('idsEdit'); if(!h)return;
+  h.innerHTML=ID_PEOPLE.map(function(p){
+    var d=idsData[p.k]||{};
+    var nome=(d.nome||'').trim();
+    return '<div class="flrow"><b>'+(nome?esc(nome):p.label)+'</b><div class="grid g3">'+
+      ID_FIELDS.map(function(fl){
+        return '<div><label class="fld">'+fl.lb+'</label>'+
+          '<input type="text" value="'+esc(d[fl.f]||'')+'" placeholder="'+fl.ph+'" '+
+          'oninput="idsSet(\''+p.k+'\',\''+fl.f+'\',this.value)"'+
+          (fl.f==='nome'?' onchange="renderIds()"':'')+'></div>';
+      }).join('')+'</div></div>';
+  }).join('')+
+  '<p style="margin:.9em 0 0"><button class="btn ghost" onclick="idsClear()">Apagar dados deste navegador</button></p>';
+}
+
 /* ---------- VOOS: dados editáveis ---------- */
 var FK='viagem_flights_v1';
 var FLIGHTS=[
@@ -788,8 +834,7 @@ var BUY_GROUPS=[
  {k:'doc',  t:'📄 Documentos & burocracia'}
 ];
 var BUY_DEFAULT=[
- {g:'ing',t:'🔴 Sagrada Família (Barcelona, dia 29) — ~€26 · site oficial, horário marcado'},
- {g:'ing',t:'🔴 Park Güell (Barcelona, dia 29) — ~€18 · cota por horário'},
+ {g:'ing',t:'🔴 Park Güell (Barcelona, dia 29, 15h) — ~€18 · cota por horário'},
  {g:'ing',t:'🔴 Palácio da Pena (Sintra, dia 04) — ~€20 · lota muito, horário obrigatório'},
  {g:'ing',t:'Quinta da Regaleira (Sintra, dia 04) — ~€15 · online evita fila'},
  {g:'ing',t:'Livraria Lello (Porto, dia 07) — ~€8 (abate em livro) · online + ir cedo'},
@@ -813,7 +858,8 @@ var BUY_DEFAULT=[
 function buyLoad(){
   try{buy=JSON.parse(localStorage.getItem(BK)||'null')}catch(e){buy=null}
   if(!buy||!buy.length) buy=BUY_DEFAULT.map(function(x){return{g:x.g,t:x.t,c:0}});
-  var n=buy.length; buy=buy.filter(function(x){return x.g!=='souv'});
+  var n=buy.length;
+  buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t)});
   if(buy.length!==n) buySave();
   renderBuy();
 }
@@ -954,6 +1000,7 @@ var DEFAULT_DOCS=[
   {cat:'Hospedagem',titulo:'Barcelona — Airbnb (host Lisbeth)',data:'28/set–01/out',codigo:'',val:'',link:'',obs:'Carrer del Rector Triadó, Hostafrancs 08014. Check-in ≥16h / out ≤12h. ~10 min a pé de Sants.'},
   {cat:'Hospedagem',titulo:'Lisboa — Quarto da Sophia (host Rodrigo)',data:'01–06/out',codigo:'',val:'',link:'',obs:'Rua Francisco Sanches 43, Arroios 1170-141. Check-in ≥15h (cofre) / out ≤10h. Metrô Arroios 2-3 min.'},
   {cat:'Hospedagem',titulo:'Porto — ML Apartments',data:'06–10/out',codigo:'',val:'',link:'',obs:'Av. de Fernão de Magalhães 615, Bonfim 4350-086. Check-in ≥15h / out ≤11h. Táxi ~7 min de Campanhã.'},
+  {cat:'Atrações',titulo:'Sagrada Família (entrada + audioguia)',data:'30/set 17:30',codigo:'',link:'https://sagradafamilia.org',obs:'Entrada básica €26/pp. Audioguia em PORTUGUÊS no app oficial (baixar no wi-fi antes!). Chegar 17:15. Livre até fechar às 20h. Sem torres/cripta.'},
   {cat:'Trens',titulo:'Iryo Madri → Barcelona',data:'28/set 15:52→18:54',codigo:'',val:'',link:'',obs:'Atocha → Barcelona-Sants. Tarifa Inicial (só bagagem de cabine).'},
   {cat:'Trens',titulo:'CP IC 721 Lisboa → Porto',data:'06/out 09:30→12:43',codigo:'',val:'',link:'',obs:'Santa Apolónia → Campanhã. 3h13. Sem raio-x.'}
 ];
@@ -1091,24 +1138,25 @@ var DAY_ROUTES={
   {n:5,name:"Bar El Xampanyet",ll:[41.38451,2.18167],mode:"walk",how:"🚶 ~10 min a pé"},
   {n:6,name:"Passeig del Born",ll:[41.38476,2.18281],mode:"walk",how:"🚶 ~2 min a pé"}
  ]},
- "barcelona-29":{label:"Dia Gaudí + pôr do sol nos Bunkers",tm:"transit",pts:[
+ "barcelona-29":{label:"Modernismo + Bunkers",tm:"transit",pts:[
   {n:1,name:"Casa Batlló",ll:[41.39154,2.1647],mode:"start",how:"🚇 metrô L2/L3/L4 Passeig de Gràcia"},
   {n:2,name:"La Pedrera (Casa Milà)",ll:[41.3954,2.16176],mode:"walk",how:"🚶 ~6 min a pé"},
-  {n:3,name:"Sagrada Família",ll:[41.4035,2.17443],mode:"transport",how:"🚇 metrô L5 (Diagonal), ~10 min"},
-  {n:4,name:"Almoço em Gràcia",ll:[41.40022,2.15758],mode:"transport",how:"🚇 metrô L5 + 🚶, ~18 min"},
+  {n:3,name:"Sant Pau Modernista",ll:[41.41267,2.17434],mode:"transport",how:"🚇 metrô L5 até Sant Pau/Dos de Maig, ~15 min"},
+  {n:4,name:"Almoço em Gràcia",ll:[41.40022,2.15758],mode:"transport",how:"🚇 metrô L5 + 🚶, ~20 min"},
   {n:5,name:"Park Güell",ll:[41.41423,2.15246],mode:"transport",how:"🚇 L3 Lesseps + 🚶 subida, ~25 min"},
   {n:6,name:"Bunkers del Carmel",ll:[41.41926,2.16154],mode:"transport",how:"🚌 bus V17/119 + 🚶, ~25 min"},
-  {n:7,name:"Plaça del Sol",ll:[41.40162,2.15671],mode:"transport",how:"🚌 bus 119 + 🚶, ~25 min"}
+  {n:7,name:"Plaça del Sol (jantar)",ll:[41.40162,2.15671],mode:"transport",how:"🚌 bus 119 + 🚶, ~25 min"}
  ]},
- "barcelona-30":{label:"Mar + Montjuïc + pintxos no Poble Sec",tm:"transit",pts:[
-  {n:1,name:"Praia da Barceloneta",ll:[41.37933,2.19297],mode:"start",how:"🚇 metrô L4 Barceloneta, ~20 min"},
-  {n:2,name:"Port Vell",ll:[41.38033,2.18256],mode:"walk",how:"🚶 ~12 min a pé"},
-  {n:3,name:"La Rambla",ll:[41.38086,2.17339],mode:"walk",how:"🚶 ~10 min a pé"},
-  {n:4,name:"Mercat de la Boqueria",ll:[41.38174,2.17155],mode:"walk",how:"🚶 ~3 min a pé"},
-  {n:5,name:"Castell de Montjuïc",ll:[41.36338,2.16614],mode:"transport",how:"🚇 L3 + funicular + 🚠, ~35 min"},
-  {n:6,name:"Fundació Joan Miró",ll:[41.36864,2.16008],mode:"transport",how:"🚠 teleférico + 🚶, ~15 min"},
-  {n:7,name:"Escadarias do MNAC",ll:[41.3686,2.15346],mode:"walk",how:"🚶 ~12 min a pé pelos jardins"},
-  {n:8,name:"Carrer de Blai",ll:[41.37308,2.16611],mode:"transport",how:"🚶 descida + 🚇 L3 Poble Sec, ~20 min"}
+ "barcelona-30":{label:"Montjuïc + mar + Sagrada Família",tm:"transit",pts:[
+  {n:1,name:"Castell de Montjuïc",ll:[41.36338,2.16614],mode:"start",how:"🚇 L2/L3 Paral·lel + funicular + 🚠, ~30 min"},
+  {n:2,name:"Fundació Joan Miró",ll:[41.36864,2.16008],mode:"walk",how:"🚠 teleférico + 🚶, ~15 min"},
+  {n:3,name:"Escadarias do MNAC",ll:[41.3686,2.15346],mode:"walk",how:"🚶 ~12 min pelos jardins"},
+  {n:4,name:"Font Màgica",ll:[41.37116,2.15174],mode:"walk",how:"🚶 ~5 min descendo"},
+  {n:5,name:"Mercat de la Boqueria",ll:[41.38174,2.17155],mode:"transport",how:"🚇 L3 de Espanya até Liceu, ~12 min"},
+  {n:6,name:"Port Vell",ll:[41.38033,2.18256],mode:"walk",how:"🚶 ~12 min a pé"},
+  {n:7,name:"Praia da Barceloneta",ll:[41.37933,2.19297],mode:"walk",how:"🚶 ~12 min pela orla"},
+  {n:8,name:"SAGRADA FAMÍLIA · 17:30",ll:[41.4035,2.17443],mode:"transport",how:"🚇 L4 Barceloneta → L5 Sagrada, ~25 min"},
+  {n:9,name:"Carrer de Blai (Poble Sec)",ll:[41.37308,2.16611],mode:"transport",how:"🚇 L5 + L3 Poble Sec, ~25 min"}
  ]},
  "barcelona-01":{label:"Último dia + voo p/ Lisboa",tm:"transit",pts:[
   {n:1,name:"Santa Maria del Mar",ll:[41.38378,2.18201],mode:"start",how:"🚇 metrô L4 Jaume I, ~25 min"},
@@ -1270,7 +1318,7 @@ function buildMap(id){
 }
 
 /* ---------- INIT ---------- */
-loadChecks(); fxLoad(); fxCalc(); docsLoad(); renderDocs(); packLoad(); buyLoad(); flLoad();
+loadChecks(); fxLoad(); fxCalc(); docsLoad(); renderDocs(); packLoad(); buyLoad(); flLoad(); idsLoad();
 injectDayMaps();
 fixImages();
 document.querySelectorAll('details.mapwrap').forEach(function(d){
