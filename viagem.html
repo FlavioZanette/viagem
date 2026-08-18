@@ -977,7 +977,7 @@ var BUY_DEFAULT=[
  {g:'pass',t:'🦁 Zoo de Lisboa (sáb 03/out, manhã) — balcão c/ cartão TAP Miles&Go tem −15% (€26,35 vs €31/pp; conferir se vale p/ os dois) ou online −5%'},
  {g:'serv',t:'Lisboa Card 72h (~€54/pp) — Belém + transporte + trem de Sintra'},
  {g:'serv',t:'Seguro viagem GRÁTIS do Mastercard Black: emitir certificado no portal AIG (passagens pagas no UV ✅) — salvar PDF no celular dos dois'},
- {g:'serv',t:'eSIM — 1GB grátis Omio (código OMIO1GB, app Kolet) + eventual complemento'},
+ {g:'serv',t:'📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'},
  {g:'volta',t:'🔴 Voo doméstico SP → POA (dom 11/out à noite) — milhas ou dinheiro'},
  {g:'volta',t:'Hotel 1 noite em SP (sáb 10/out) — perto da Paulista/Jardins'},
  {g:'doc',t:'Passaporte válido até pelo menos abr/2027 (regra Schengen)'},
@@ -996,7 +996,7 @@ function buyLoad(){
   var n=buy.length;
   buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t) && !/ETIAS/i.test(x.t)});
   buy=buy.map(function(x){ if(/Seguro viagem \(casal/.test(x.t)) x.t='Seguro viagem GRÁTIS do Mastercard Black: emitir certificado no portal AIG (passagens pagas no UV ✅) — salvar PDF no celular dos dois'; return x; });
-  buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); return x; });
+  buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); if(/eSIM — 1GB grátis Omio/.test(x.t)) x.t='📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'; return x; });
   if(buy.length!==n) buySave();
   try{
     if(!localStorage.getItem('viagem_mig_ue')){
