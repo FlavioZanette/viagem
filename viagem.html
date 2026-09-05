@@ -280,6 +280,7 @@
     <h2>🚄 Trens — ✅ reservados</h2>
     <div class="twrap"><table>
       <tr><th>Trecho</th><th>Data</th><th>Horário</th><th>Detalhe</th></tr>
+      <tr><td><b>Madri ⇄ Toledo</b><br><span class="muted">Puerta de Atocha ⇄ Toledo · bate-volta</span></td><td>sáb 26/set</td><td>08:15 → 08:49 · volta 18:45 → 19:19</td><td>Renfe <b>Avant</b> · ida+volta · via Omio ✅</td></tr>
       <tr><td><b>Madri → Barcelona</b><br><span class="muted">Atocha → Barcelona-Sants</span></td><td>seg 28/set</td><td>15:52 → 18:54</td><td>Iryo <b>06151</b> · Inicial · <b>coche 7, assentos 2A e 2B</b></td></tr>
       <tr><td><b>Lisboa → Porto</b><br><span class="muted">Santa Apolónia → Campanhã</span></td><td>ter 06/out</td><td>09:30 → 12:43</td><td>IC <b>721</b> · 2ª classe · <b>carruagem 21, lugares 115 e 117</b></td></tr>
     </table></div>
@@ -295,7 +296,7 @@
       <tr><td><b>Lisboa</b></td><td>qui 01/out</td><td>ter 06/out</td><td class="num">5</td></tr>
       <tr><td><b>Porto</b></td><td>ter 06/out</td><td>sáb 10/out</td><td class="num">4</td></tr>
     </table></div>
-    <p class="muted" style="margin:.6em 0 0">Trechos terrestres <b>✅ reservados</b>: Madri→Barcelona (Iryo 28/set 15:52) · Lisboa→Porto (CP 06/out 09:30)</p>
+    <p class="muted" style="margin:.6em 0 0">Trechos terrestres <b>✅ reservados</b>: Madri⇄Toledo (Avant 26/set 08:15) · Madri→Barcelona (Iryo 28/set 15:52) · Lisboa→Porto (CP 06/out 09:30)</p>
   </div>
 
   <div class="card">
@@ -1240,6 +1241,7 @@ var DEFAULT_DOCS=[
   {cat:'Hospedagem',titulo:'Lisboa — Quarto da Sophia (host Rodrigo)',data:'01–06/out',codigo:'',val:'',link:'',obs:'Rua Francisco Sanches 43, Arroios 1170-141. Check-in ≥15h (cofre) / out ≤10h. Metrô Arroios 2-3 min.'},
   {cat:'Hospedagem',titulo:'Porto — ML Apartments',data:'06–10/out',codigo:'',val:'',link:'',obs:'Av. de Fernão de Magalhães 615, Bonfim 4350-086. Check-in ≥15h / out ≤11h. Táxi ~7 min de Campanhã.'},
   {cat:'Atrações',titulo:'Sagrada Família (entrada + audioguia)',data:'30/set 17:30',codigo:'',link:'https://sagradafamilia.org',obs:'Entrada básica €26/pp. Audioguia em PORTUGUÊS no app oficial (baixar no wi-fi antes!). Chegar 17:15. Livre até fechar às 20h. Sem torres/cripta.'},
+  {cat:'Trens',titulo:'Avant Madri ⇄ Toledo (bate-volta)',data:'26/set 08:15→08:49 · volta 18:45→19:19',codigo:'',val:'',link:'',obs:'Comprado via Omio (R$ 281,79 os dois, i+v). Bilhetes no app/e-mail da Omio — salvar PDF offline. Raio-x em Atocha: estar 07:55. Volta: estação de Toledo até 18:25.'},
   {cat:'Trens',titulo:'Iryo Madri → Barcelona',data:'28/set 15:52→18:54',codigo:'',val:'',link:'',obs:'Atocha → Barcelona-Sants. Tarifa Inicial (só bagagem de cabine).'},
   {cat:'Seguro',titulo:'MasterAssist Black (AIG/AXA) — casal',data:'até 17/08/2027',codigo:'',link:'https://www.mycardbenefits.com',obs:'US$175 mil médicas/pessoa · Schengen OK · LIGAR ANTES: +1 636-722-7111 (a cobrar, PT) · ES 900-97-1231 · PT 800-8-11-272.'},
   {cat:'Trens',titulo:'CP IC 721 Lisboa → Porto',data:'06/out 09:30→12:43',codigo:'',val:'',link:'',obs:'Santa Apolónia → Campanhã. 3h13. Sem raio-x.'},
@@ -1259,6 +1261,13 @@ function docsLoad(){ try{docs=JSON.parse(localStorage.getItem(DK)||'null')||DEFA
       if(!docs.some(function(d){return /LA 3164/.test(d.obs||'')||/LATAM CGH/.test(d.titulo)}))
         docs.push({cat:'Voos',titulo:'LATAM CGH→POA (volta doméstica)',data:'11/out 21:05→22:45',codigo:'',val:'',link:'',obs:'Voo LA 3164, 1h40, tarifa Light. Emitido em milhas (30.821 + R$124 o casal). Sem mala despachada — se precisar, adicionar no app LATAM antecipado. Remarcação antes do voo: multa R$450.'});
       localStorage.setItem('viagem_mig_la','1'); docsSave();
+    }
+  }catch(e){}
+  try{
+    if(!localStorage.getItem('viagem_mig_tol')){
+      if(!docs.some(function(d){return /Avant Madri/.test(d.titulo)}))
+        docs.push({cat:'Trens',titulo:'Avant Madri ⇄ Toledo (bate-volta)',data:'26/set 08:15→08:49 · volta 18:45→19:19',codigo:'',val:'',link:'',obs:'Comprado via Omio (R$ 281,79 os dois, i+v). Bilhetes no app/e-mail da Omio — salvar PDF offline. Raio-x em Atocha: estar 07:55. Volta: estação de Toledo até 18:25.'});
+      localStorage.setItem('viagem_mig_tol','1'); docsSave();
     }
   }catch(e){}
 }
