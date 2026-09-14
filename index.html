@@ -1047,17 +1047,15 @@ var BUY_DEFAULT=[
  {g:'ing',t:'🔴 Park Güell (Barcelona, dia 29, 15h) — ~€18 · cota por horário'},
  {g:'ing',t:'🔴 Palácio da Pena (Sintra, dia 04) — ~€20 · lota muito, horário obrigatório'},
  {g:'ing',t:'Quinta da Regaleira (Sintra, dia 04) — ~€15 · online evita fila'},
- {g:'ing',t:'Museu Picasso (Barcelona, dia 01) — grátis quinta 16h, mas slot online é limitado'},
+ {g:'ing',t:'⏰ Museu Picasso (BCN, qui 01/out 16h) — slots GRÁTIS abrem dom 27/set às 9h (4 dias antes) e somem em ~2h · pôr alarme!'},
  {g:'ing',t:'Castelo de São Jorge (Lisboa, dia 02) — ~€15 · bilhete online'},
- {g:'trem',t:'Toledo (dia 26) — trem Avant de Atocha, ida + volta (esgota)'},
  {g:'trem',t:'Douro → Pinhão (dia 08, se self-guided) — regional CP, compra no dia'},
  {g:'pass',t:'Vale do Douro (dia 08) — se for tour (2 quintas + almoço + cruzeiro), reservar cedo'},
  {g:'pass',t:"Caves de vinho em Gaia (dia 07) — Graham's/Taylor's pedem marcação de horário"},
- {g:'pass',t:'Casa de fado (Lisboa, dia 02) — reservar mesa (as boas lotam)'},
+ {g:'pass',t:'🎶 Fado (Lisboa, sex 02/out) — Tasca do Chico em Alfama NÃO aceita reserva: chegar 20h15 (consumo mín. ~€10-15/pp)'},
  {g:'pass',t:'Prado / Reina Sofía (Madri) — reservar o slot do horário grátis'},
  {g:'pass',t:'🦁 Zoo de Lisboa (sáb 03/out, manhã) — balcão c/ cartão TAP Miles&Go tem −15% (€26,35 vs €31/pp; conferir se vale p/ os dois) ou online −5%'},
    {g:'serv',t:'📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'},
- {g:'volta',t:'Hotel 1 noite em SP (sáb 10/out) — perto da Paulista/Jardins'},
  {g:'doc',t:'Passaporte válido até pelo menos abr/2027 (regra Schengen)'},
  {g:'doc',t:'Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'},
  {g:'doc',t:'🏛️ Cartório: declaração de união estável (RG+CPF+comprov. residência) — a apólice AIG exige p/ cobrir a companheira num sinistro; PDF no celular dos dois'},
@@ -1072,8 +1070,8 @@ function buyLoad(){
   try{buy=JSON.parse(localStorage.getItem(BK)||'null')}catch(e){buy=null}
   if(!buy||!buy.length) buy=BUY_DEFAULT.map(function(x){return{g:x.g,t:x.t,c:0}});
   var n=buy.length;
-  buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t) && !/ETIAS/i.test(x.t) && !/Lisboa Card/i.test(x.t) && !/Seguro viagem GR/i.test(x.t) && !/Voo doméstico SP/i.test(x.t) && !/Livraria Lello/i.test(x.t)});
-    buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); if(/eSIM — 1GB grátis Omio/.test(x.t)) x.t='📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'; return x; });
+  buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t) && !/ETIAS/i.test(x.t) && !/Lisboa Card/i.test(x.t) && !/Seguro viagem GR/i.test(x.t) && !/Voo doméstico SP/i.test(x.t) && !/Livraria Lello/i.test(x.t) && !/^Toledo \(dia 26\)/i.test(x.t) && !/Hotel 1 noite em SP/i.test(x.t)});
+    buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); if(/Casa de fado/.test(x.t)) x.t='🎶 Fado (Lisboa, sex 02/out) — Tasca do Chico em Alfama NÃO aceita reserva: chegar 20h15 (consumo mín. ~€10-15/pp)'; if(/Museu Picasso \(Barcelona/.test(x.t)) x.t='⏰ Museu Picasso (BCN, qui 01/out 16h) — slots GRÁTIS abrem dom 27/set às 9h (4 dias antes) e somem em ~2h · pôr alarme!'; if(/eSIM — 1GB grátis Omio/.test(x.t)) x.t='📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'; return x; });
   if(buy.length!==n) buySave();
   try{
     if(!localStorage.getItem('viagem_mig_ue')){
