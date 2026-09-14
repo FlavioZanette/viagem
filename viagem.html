@@ -461,13 +461,6 @@
         • <b>Plano B dos museus grátis</b> — se os slots gratuitos falharem: Prado ~€15 (pagar? SIM, top-3 do mundo) · Reina Sofía ~€12 (Guernica; opcional) · Picasso BCN ~€15 (opcional). <a href="https://www.museodelprado.es" target="_blank" rel="noopener">Prado</a> · <a href="https://www.museoreinasofia.es" target="_blank" rel="noopener">Reina Sofía</a> · <a href="https://museupicassobcn.cat" target="_blank" rel="noopener">Picasso</a>
       </div>
 
-      <div class="callout red" style="margin-top:10px">
-        <b>🧳 Malas despachadas — de R$ 0 a ~R$ 2.700 · decidir até ~15/set</b><br>
-        Os bilhetes TAP são award <b>sem NENHUMA mala despachada nos dois sentidos</b>, e o LATAM da volta é Light.<br>
-        💡 <b>Plano recomendado:</b> ida só de mão (cabine 10kg + item pessoal cada = 4 volumes) → comprar mala barata no Porto (€25-40) → despachar <b>só na volta</b>: 1 mala ~R$ 690 · 2 malas ~R$ 1.380.<br>
-        💸 <b>Preços antecipados:</b> TAP ~€90/mala/sentido (no balcão €130-160!) · LATAM ~R$ 140 (balcão R$ 200).<br>
-        <a href="https://www.flytap.com" target="_blank" rel="noopener">🎟️ TAP — Minhas Reservas</a> · <a href="https://www.latamairlines.com/br/pt" target="_blank" rel="noopener">🎟️ LATAM — Minhas Viagens</a>
-      </div>
     </div>
   </div>
 
@@ -1058,7 +1051,6 @@ var BUY_DEFAULT=[
    {g:'serv',t:'📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'},
  {g:'doc',t:'Passaporte válido até pelo menos abr/2027 (regra Schengen)'},
  {g:'doc',t:'Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'},
- {g:'doc',t:'🏛️ Cartório: declaração de união estável (RG+CPF+comprov. residência) — a apólice AIG exige p/ cobrir a companheira num sinistro; PDF no celular dos dois'},
  {g:'doc',t:"📁 Pasta \"Imigração\" no celular DOS DOIS — criar e conferir os 4 itens abaixo"},
  {g:'doc',t:"📁 Imigração: foto do passaporte (página de dados)"},
  {g:'doc',t:"📁 Imigração: e-tickets TAP ida e volta (PDF)"},
@@ -1070,16 +1062,9 @@ function buyLoad(){
   try{buy=JSON.parse(localStorage.getItem(BK)||'null')}catch(e){buy=null}
   if(!buy||!buy.length) buy=BUY_DEFAULT.map(function(x){return{g:x.g,t:x.t,c:0}});
   var n=buy.length;
-  buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t) && !/ETIAS/i.test(x.t) && !/Lisboa Card/i.test(x.t) && !/Seguro viagem GR/i.test(x.t) && !/Voo doméstico SP/i.test(x.t) && !/Livraria Lello/i.test(x.t) && !/^Toledo \(dia 26\)/i.test(x.t) && !/Hotel 1 noite em SP/i.test(x.t)});
+  buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t) && !/ETIAS/i.test(x.t) && !/Lisboa Card/i.test(x.t) && !/Seguro viagem GR/i.test(x.t) && !/Voo doméstico SP/i.test(x.t) && !/Livraria Lello/i.test(x.t) && !/^Toledo \(dia 26\)/i.test(x.t) && !/Hotel 1 noite em SP/i.test(x.t) && !/uni\u00e3o est\u00e1vel/i.test(x.t)});
     buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); if(/Casa de fado/.test(x.t)) x.t='🎶 Fado (Lisboa, sex 02/out) — Tasca do Chico em Alfama NÃO aceita reserva: chegar 20h15 (consumo mín. ~€10-15/pp)'; if(/Museu Picasso \(Barcelona/.test(x.t)) x.t='⏰ Museu Picasso (BCN, qui 01/out 16h) — slots GRÁTIS abrem dom 27/set às 9h (4 dias antes) e somem em ~2h · pôr alarme!'; if(/eSIM — 1GB grátis Omio/.test(x.t)) x.t='📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'; return x; });
   if(buy.length!==n) buySave();
-  try{
-    if(!localStorage.getItem('viagem_mig_ue')){
-      if(!buy.some(function(x){return /uni\u00e3o est\u00e1vel/i.test(x.t)}))
-        buy.push({g:'doc',t:'🏛️ Cartório: declaração de união estável (RG+CPF+comprov. residência) — a apólice AIG exige p/ cobrir a companheira num sinistro; PDF no celular dos dois',c:0});
-      localStorage.setItem('viagem_mig_ue','1'); buySave();
-    }
-  }catch(e){}
   try{
     if(!localStorage.getItem('viagem_mig_imig')){
       if(!buy.some(function(x){return /Imigra\u00e7\u00e3o:/.test(x.t)||/Pasta \"Imigra/.test(x.t)}))
