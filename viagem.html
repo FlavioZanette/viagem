@@ -438,9 +438,9 @@
       </div>
 
       <div class="callout sea" style="margin-top:10px">
-        <b>🦁 Zoo de Lisboa — confirmar · €52,70-62 o casal · sáb 03/out, 9h45</b><br>
-        ✅ <b>A favor:</b> golfinhos às 11h + teleférico inclusos, manhã inteira desenhada no roteiro do dia 03; com o cartão TAP Miles&Go no balcão sai −15% (€26,35/pp).<br>
-        ❌ <b>Contra:</b> é o ingresso mais caro da viagem inteira; zoo é zoo — se vocês não forem "gente de bicho", o dinheiro rende mais em outro lugar.<br>
+        <b>🦁 Zoo de Lisboa — confirmar · ~€58 o casal · sáb 03/out, 9h45</b><br>
+        ✅ <b>A favor:</b> golfinhos às 11h + teleférico inclusos, manhã inteira desenhada no roteiro do dia 03; não esgota nem tem hora marcada — dá pra decidir na véspera.<br>
+        ❌ <b>Contra:</b> é o ingresso mais caro da viagem inteira (€31/pp cheio); zoo é zoo — se vocês não forem "gente de bicho", o dinheiro rende mais em outro lugar.<br>        💳 <b>Como comprar:</b> online −5% = €29,45/pp (€58,90 os dois, sem fila) · o −15% do TAP Miles&Go vale <b>só pro titular</b> e só na bilheteira física (€57,35 os dois) — diferença de €1,55, não vale enfrentar fila de sábado.<br>
         🔄 <b>Alternativa pelo mesmo dinheiro:</b> Oceanário (~€25/pp) — nº 1 do TripAdvisor em Lisboa, 2h, no Parque das Nações.<br>
         <a href="https://www.google.com/maps/search/?api=1&query=Jardim+Zool%C3%B3gico+de+Lisboa" target="_blank" rel="noopener">⭐ Avaliações Zoo</a> · <a href="https://www.zoo.pt/pt/visitar/precos/" target="_blank" rel="noopener">🎟️ Zoo (oficial)</a> · <a href="https://www.oceanario.pt" target="_blank" rel="noopener">🐠 Oceanário</a>
       </div>
@@ -1047,7 +1047,7 @@ var BUY_DEFAULT=[
  {g:'pass',t:"Caves de vinho em Gaia (dia 07) — Graham's/Taylor's pedem marcação de horário"},
  {g:'pass',t:'🎶 Fado (Lisboa, sex 02/out) — Tasca do Chico em Alfama NÃO aceita reserva: chegar 20h15 (consumo mín. ~€10-15/pp)'},
  {g:'pass',t:'Prado / Reina Sofía (Madri) — reservar o slot do horário grátis'},
- {g:'pass',t:'🦁 Zoo de Lisboa (sáb 03/out, manhã) — balcão c/ cartão TAP Miles&Go tem −15% (€26,35 vs €31/pp; conferir se vale p/ os dois) ou online −5%'},
+ {g:'pass',t:'🦁 Zoo de Lisboa (sáb 03/out, manhã) — não esgota, comprar online −5% (€29,45/pp = €58,90) e pular a fila · balcão c/ TAP Miles&Go só desconta o TITULAR (€57,35 os dois)'},
    {g:'serv',t:'📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'},
  {g:'doc',t:'Passaporte válido até pelo menos abr/2027 (regra Schengen)'},
  {g:'doc',t:'Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'},
@@ -1063,7 +1063,7 @@ function buyLoad(){
   if(!buy||!buy.length) buy=BUY_DEFAULT.map(function(x){return{g:x.g,t:x.t,c:0}});
   var n=buy.length;
   buy=buy.filter(function(x){return x.g!=='souv' && !/Sagrada/i.test(x.t) && !/ETIAS/i.test(x.t) && !/Lisboa Card/i.test(x.t) && !/Seguro viagem GR/i.test(x.t) && !/Voo doméstico SP/i.test(x.t) && !/Livraria Lello/i.test(x.t) && !/^Toledo \(dia 26\)/i.test(x.t) && !/Hotel 1 noite em SP/i.test(x.t) && !/uni\u00e3o est\u00e1vel/i.test(x.t)});
-    buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); if(/Casa de fado/.test(x.t)) x.t='🎶 Fado (Lisboa, sex 02/out) — Tasca do Chico em Alfama NÃO aceita reserva: chegar 20h15 (consumo mín. ~€10-15/pp)'; if(/Museu Picasso \(Barcelona/.test(x.t)) x.t='⏰ Museu Picasso (BCN, qui 01/out 16h) — slots GRÁTIS abrem dom 27/set às 9h (4 dias antes) e somem em ~2h · pôr alarme!'; if(/eSIM — 1GB grátis Omio/.test(x.t)) x.t='📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'; return x; });
+    buy=buy.map(function(x){ if(/Cartão internacional \(Wise/.test(x.t)) x.t='Cartões prontos: ARQ físico pedido e testado + Nubank Global (celular e físico) + Ultravioleta — tudo na carteira do celular'; if(/\(Wise ou Nubank\)/.test(x.t)) x.t=x.t.replace('(Wise ou Nubank)','(Nubank ou ARQ)'); if(/Zoo de Lisboa/.test(x.t)) x.t='🦁 Zoo de Lisboa (sáb 03/out, manhã) — não esgota, comprar online −5% (€29,45/pp = €58,90) e pular a fila · balcão c/ TAP Miles&Go só desconta o TITULAR (€57,35 os dois)'; if(/Casa de fado/.test(x.t)) x.t='🎶 Fado (Lisboa, sex 02/out) — Tasca do Chico em Alfama NÃO aceita reserva: chegar 20h15 (consumo mín. ~€10-15/pp)'; if(/Museu Picasso \(Barcelona/.test(x.t)) x.t='⏰ Museu Picasso (BCN, qui 01/out 16h) — slots GRÁTIS abrem dom 27/set às 9h (4 dias antes) e somem em ~2h · pôr alarme!'; if(/eSIM — 1GB grátis Omio/.test(x.t)) x.t='📶 Internet: ativar 7GB UV (app Nubank) + 1GB Omio (código OMIO1GB, app Kolet) + 2GB Nomad (Tayná) · mapas offline baixados · fotos só no wifi — se faltar lá: recarga eSIM no próprio app (chip físico não)'; return x; });
   if(buy.length!==n) buySave();
   try{
     if(!localStorage.getItem('viagem_mig_imig')){
